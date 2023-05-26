@@ -4,7 +4,7 @@ const api = 'api_key=live_ZfLtEnElDpewJMvadPWb8wUz0ot68ZQdARpOUsPaZPWpdFwtjDc0ie
 const {MY_API_KEY} = process.env;
 const axios= require("axios");
 
-const getDogsId = async (req, resp) => {    
+const getDogId = async (req, resp) => {    
     const DogsId = req.params.idRaza;     
     const URLcompleta = URLid + DogsId;  
     try {
@@ -20,5 +20,5 @@ const getDogsId = async (req, resp) => {
     }  
 }
   module.exports = {
-    getDogsId
+    getDogId
 }

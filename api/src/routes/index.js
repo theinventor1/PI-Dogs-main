@@ -1,12 +1,22 @@
+const { getDogNombreyTodos }  = require('../controllers/getPerroNombreyTodos');
+const { getDogId }  = require('../controllers/getPerroId');
+// const { postPerro } = require('../controllers/postPerro');
 
-const { getDogsNombreyTodos }  = require('../controllers/getPerroNombreyTodos')
-const { getDogsId }  = require('../controllers/getPerroId')
+const { postPerro } = require('../controllers/postCan2');
+
+const { Perro } = require('../db');
 
 const { Router } = require('express');
 const router = Router();
 
-router.get("/dogs/:idRaza", getDogsId);
+//const { Sequelize } = require('sequelize');
+//const sequelize = new Sequelize('postgres://postgres:planck@localhost:5432/dogs', { logging: false , native: false });
+//const { perros } = sequelize.models;
 
-router.get("/dogs/", getDogsNombreyTodos);
 
-module.exports = router;
+router.get("/dogs/:idRaza", getDogId);
+router.get("/dogs/", getDogNombreyTodos);
+router.post("/dogs", postPerro);
+
+
+module.exports =router ;
