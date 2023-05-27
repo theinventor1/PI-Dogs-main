@@ -2,7 +2,6 @@
 const URLtodos = 'https://api.thedogapi.com/v1/breeds/';
 const URLraza  = 'https://api.thedogapi.com/v1/breeds/search?q=';
 const URLid    = 'https://api.thedogapi.com/v1/breeds/';
-const { MY_API_KEY } = process.env;
 const { conn } = require('../db');
 const axios= require("axios");
 
@@ -10,22 +9,14 @@ const axios= require("axios");
    let aux2 = req.query.nombreraza;
    const URLcompleta = URLraza + req.query.nombreraza;    
    let aux3 = Number.isInteger(parseInt(aux2));
-   if (aux3){
+   if (aux3){    /**aqui traigo por numero */
         console.log('aux2:',aux2,' SI es numero');
        let DogsId = aux2;    
        const URLcompleta = URLid + DogsId;  
        try { 
          console.log('URLcompleta:',URLcompleta);
          const dogsApi = (await axios.get( URLcompleta ));
-         
-         delete dogsApi.data.weight;
-         delete dogsApi.data.height;
-         delete dogsApi.data.breed_group;
-
-         let url= 'https://cdn2.thedogapi.com/images/';
-         dogsApi.data.reference_image_id = url + dogsApi.data.reference_image_id + '.jpg';
-
-         console.log('resultado: ', dogsApi.data);
+         console.log('el resultrado:', dogsApi.data);
          return resp.status(200).send(dogsApi.data);  
        }
        catch(error){
