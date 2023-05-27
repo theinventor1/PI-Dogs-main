@@ -2,26 +2,27 @@ import React from 'react';
 import { useState } from "react";
 import { SBCont, SBInput, SBBtn } from './styled.Searchbar';
 
-export default function SearchBar( { buscaCan } ) {
+function SearchBar( { buscaCan } ) {
+      const [raza, setRaza]   = useState(""); /**esto estaba bien  */
 
- const [raza, setRaza]   = useState(""); /**esto estaba bien  */
+      /**handleChange () */
+      function handChg (event) { 
 
- /**handleChange () */
- function handChg (event) { 
-   setRaza(event.target.value);
-   console.log(event.target.value)
- }
+        setRaza(event.target.value);
+        console.log('handChg:',event.target.value)
+      }
 
-return (
-<SBCont>
- <SBInput type="text" name="search" value = {raza} onChange= {handChg} />
- 
- <SBBtn  onClick= { () => buscaCan(raza) }>Agregar-Pers</SBBtn>
+     return (
+     <SBCont>
+      <SBInput type="search" name="search" value = {raza} onChange= {handChg} />
+      
+      <SBBtn  onClick= { () => buscaCan(raza) }>Agregar-Pers</SBBtn>
 
- <button onClick= { () => buscaCan('Akita') } >HOLA BOTON</button>
-</SBCont>
+      <button onClick= { () => buscaCan('Akita') } >HOLA BOTON</button>
+     </SBCont>
  )
 }
+export default SearchBar
 /*
 Akita
 Affenpinscher

@@ -3,21 +3,21 @@ import Card from "../Card/Card";
 import {Conx } from './styled.Cards.js';
 
 export default function Cards(props) {
- const { perritos } = props;
+ const { losperros } = props;
   return (
-   <div >
-      { perritos?.map((perrin) => {
+   <Conx >
+      { losperros?.map((perro) => {
         return (
           <Card
-              id={perrin.id}
-              name={perrin.name}
-              bred_for={perrin.bred_for}
-              life_span={perrin.life_span}
-              temperament={perrin.temperament}
-              image={perrin.reference_image_id}             
+              id={perro.id}
+              name={perro.name}
+              bred_for={perro.bred_for}
+              life_span={perro.life_span}
+              temperament={perro.temperament}
+              image={perro.reference_image_id}             
           />
         );
       }) }
-    </div>
+    </Conx>
   )
 }

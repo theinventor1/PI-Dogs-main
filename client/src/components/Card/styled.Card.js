@@ -12,7 +12,7 @@ export const Cont = styled.div`
   align-items: center;
 `;
 export const Tit2 = styled.h2`
-  font-size: 20px;
+  font-size: 16px;
   color: #666;
   margin-bottom: 10px;  
   text-align: center;
