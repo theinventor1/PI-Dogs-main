@@ -7,12 +7,11 @@ let flagOk = 0;
    console.log('Se insertó correctamente');
    flagOk = 1;
    /** */
-   console.log('henry style newCan: ', newCan);
+   console.log('postCan -> newCan: ', newCan);
+   console.log('postCan -> newCan.dataValues: ', newCan.dataValues )
 
    // obtenerIdTempNombres(id, )
-   //
-   
-   
+    
    return resp.status(201).send(newCan);  
 
  } catch (error) {

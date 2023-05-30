@@ -50,14 +50,15 @@ const axios= require("axios");
       /**aqui obtengo el id  */
       var elidperro       = objaux.id;
       var listatempsucia  = objaux.temperament;
-      
       /**debo sacar las palabras divididas por ,  */
       //console.log('el_idperro:',elidperro,'.');
       //console.log('temperamentos dirty:',listatempsucia,'.');   
-
       let elarreglolimpio = listatempsucia.split(", ");
-
-
+      //console.log('arrayLimpio: ',elarreglolimpio);
+      //elperro.data[0].urlimagen = url + objaux.reference_image_id + '.jpg';
+      // let arrayfinal = obtenerIdTempNombres(elidperro, elarreglolimpio);           
+      //console.log('--->ARRAYFINAL: ', arrayfinal);
+      //console.log('--->elperro.data[0]: ',elperro.data[0])
       return resp.status(209).send(elperro.data[0]);
      }
      catch(error) { return resp.status(404).send('No se encuentra ')  } 
