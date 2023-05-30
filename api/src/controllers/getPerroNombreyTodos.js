@@ -1,9 +1,11 @@
-
+const URLid    = 'https://api.thedogapi.com/v1/breeds/';
+const URLimagen = 'https://cdn2.thedogapi.com/images/';
 const URLtodos = 'https://api.thedogapi.com/v1/breeds/';
 const URLraza  = 'https://api.thedogapi.com/v1/breeds/search?q=';
-const URLid    = 'https://api.thedogapi.com/v1/breeds/';
-const { MY_API_KEY } = process.env;
+
+
 const { conn } = require('../db');
+
 const axios= require("axios");
 
  const getDogNombreyTodos = async (req, resp) => {
@@ -16,26 +18,31 @@ const axios= require("axios");
        const URLcompleta = URLid + DogsId;  
        try { 
          console.log('URLcompleta:',URLcompleta);
-         const dogsApi = (await axios.get( URLcompleta ));         
+         const dogsApi = (await axios.get( URLcompleta ));     
+         const {reference_image_id} = dogsApi.data;    
         // delete dogsApi.data.weight;
         // delete dogsApi.data.height;
          delete dogsApi.data.breed_group;
          delete dogsApi.data.bred_for;
          let url= 'https://cdn2.thedogapi.com/images/';
+         let urlimagen = URLimagen +  reference_image_id + '.jpg';
          dogsApi.data.reference_image_id = url + dogsApi.data.reference_image_id + '.jpg';
+         dogsApi.data.urlimagen = urlimagen;
          console.log('resultado: ', dogsApi.data);
+         console.log('urlimagen: ',urlimagen);
+
          return resp.status(200).send(dogsApi.data);  
        }
        catch(error){ return resp.status(404).send('No hay data') }  
     }
    else
-   if( aux2 != undefined ){  /**aqui traigo por nombre */
+   if( aux2 != undefined ){  /**  aqui traigo por nombre   */
       try {
       const elperro = ( await axios.get( URLcompleta ));
      // console.log("Objeto:", elperro.data[0] ,'.');
       let objaux = elperro.data[0]; /**aqui filtro para que me de un objeto */
-     // delete objaux.weight;
-     // delete objaux.height;
+      // delete objaux.weight;
+      // delete objaux.height;
       delete objaux.breed_group;
       delete objaux.bred_for;
       let url= 'https://cdn2.thedogapi.com/images/';
@@ -47,7 +54,7 @@ const axios= require("axios");
       //console.log('el_idperro:',elidperro,'.');
       //console.log('temperamentos dirty:',listatempsucia,'.');   
       let elarreglolimpio = listatempsucia.split(", ");
-      //console.log('limpio: ',elarreglolimpio);
+      console.log('arrayLimpio: ',elarreglolimpio);
       // let arrayfinal = obtenerIdTempNombres(elidperro, elarreglolimpio);           
       // console.log('el final', arrayfinal);
       console.log(elperro.data[0])
@@ -78,7 +85,7 @@ const axios= require("axios");
     }
    }
 
-   const insertarCanTemperamento = async (idRaza, arreglobj) => {
+ const insertarCanTemperamento = async (idRaza, arreglobj) => {
     try {
       if (!Array.isArray(arreglobj)) {
        throw new Error('El parámetro arreglobj no es un arreglo válido');
@@ -100,6 +107,9 @@ const axios= require("axios");
       });
     }
   };  /**coded by Felipostre */
+
+
+
 
  //  insertarCanTemperamento(5, [
  //   { id: 1 },

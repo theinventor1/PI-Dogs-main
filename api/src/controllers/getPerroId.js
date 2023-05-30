@@ -9,13 +9,11 @@ const getDogId = async (req, resp) => {
       const dogsApi = (await axios.get( URLcompleta ));
       const {reference_image_id} = dogsApi.data;
       let urlimagen = URLimagen +  reference_image_id + '.jpg';
-
       dogsApi.data.urlimagen = urlimagen; /**aqui agrego atributo 'urlimagen' al objeto  */
+      console.log('aqui por ID');
       return resp.status(200).send(dogsApi.data);  
     }
-    catch(error){
-       return resp.status(404).send('No hay data')
-    }  
+    catch(error){ return resp.status(404).send('No hay data')  }  
 }
   module.exports = {
     getDogId

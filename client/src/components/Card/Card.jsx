@@ -5,7 +5,7 @@ import { Cont, Tit2, Boton, BtnCont,Img } from './styled.Card.js';
 import { Link } from "react-router-dom";
  function Card(props) {
  const { id,name,weight,life_span,temperament, image, onClose } = props;
- console.log('onClose:', onClose);
+ //console.log('XonCloseX:', onClose);
  const [ showCloseButton, setShowCloseButton ] = useState(true);
  return (
   <Cont>
@@ -17,7 +17,7 @@ import { Link } from "react-router-dom";
        <Tit2>Nombre: {name}</Tit2>
        <Tit2>Peso: {weight+' [Kg]'}</Tit2>
        <Tit2>Años de vida: {life_span}</Tit2>
-       <Tit2>TemperamentosX: {temperament}</Tit2>    
+       <Tit2>Temperamentos: {temperament}</Tit2>    
     </Link>
   </Cont>
  )

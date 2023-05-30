@@ -19,43 +19,41 @@ function App() {
       const [ curPag, setCurPag ] = useState(1); // Página actual
       const cardsxPag = 4; // Número de tarjetas por página
       /**fin paginacion */ 
+
       function buscaCan(nombreraza) {   
+       console.log('igual entra a buscaCan')
        axios(`http://localhost:${port}/dogs?nombreraza=${nombreraza}`)
        .then(({ data }) => {  
          const perroExistente = perro.find(e => e.id == data.id);
          if (perroExistente) {   alert("en la lista:", perroExistente);  } 
          else { seteaPerros([...perro, data]);  }
        })
-       .catch(() => { alert(nombreraza,'NO se encuentra.') })  }
-      /**aqui me traigo los temperamentos */
-      function login(userData) { }
+       .catch(() => { alert(nombreraza,'NO se encuentra.') })  
+      }
+
+      function login(userData) { 
+
+      }
        // useEffect( ( ) => {  !access && navigate('/');   }, [access] )
        // useEffect(() => { navigate('/'); }, [access]);
 
-       function onClose(id) {
+      function onClose(id) {
         console.log('App -> onclose()')
-        seteaPerros(( oldChars) => { return oldChars.filter((ch) => ch.id !== id);  });
-       }
+        seteaPerros(( oldCanes) => { return oldCanes.filter((ch) => ch.id !== id);  });
+      }
         const totalPages = Math.ceil(perro.length / cardsxPag);
+      // Realiza la búsqueda de los perros con los IDs 1, 2, 3, 4 al cargar la aplicación
 
-        let dep = ['1','2'];
-
-        useEffect(() => {
-         // Realiza la búsqueda de los perros con los IDs 1, 2, 3, 4 al cargar la aplicación
-         const initialDogIds = [1, 2, 3, 4];
-     
-         initialDogIds.forEach((id) => {
-           axios(`http://localhost:${port}/dogs/${id}`)
-             .then(({ data }) => {
-               seteaPerros((oldPerros) => [...oldPerros, data]);
-             })
-             .catch((error) => {
-               console.error(`Error al buscar el perro con ID ${id}:`, error);
-             });
-         });
-     
-         navigate('/home'); // Redirige a la ruta "/home" al cargar la aplicación
-       }, []);
+      useEffect( () => {        
+       const initialDogIds = [101,102];     
+       initialDogIds.forEach((id) => { axios(`http://localhost:${port}/dogs/${id}`)
+           .then(({ data }) => { seteaPerros((oldPerros) => [...oldPerros, data]); })
+           .catch((error) => {
+             console.error(`Error al buscar perro ID ${id}:`, error);
+           });
+       });     
+       navigate('/home'); // Redirige a la ruta "/home" al cargar la aplicación
+       }, [1,2]);
 
 
      return (
