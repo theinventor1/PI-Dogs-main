@@ -50,7 +50,7 @@ const axios= require("axios");
       /**aqui obtengo el id  */
       var elidperro       = objaux.id;
       var listatempsucia  = objaux.temperament;
-      
+
       /**debo sacar las palabras divididas por ,  */
       //console.log('el_idperro:',elidperro,'.');
       //console.log('temperamentos dirty:',listatempsucia,'.');   
@@ -76,7 +76,7 @@ const axios= require("axios");
       const query = `SELECT idtemp as id FROM temperamentos WHERE nombret IN ('${arrayparam.join("','")}')`;
       const result = await conn.query(query);        
       const algo = insertarCanTemperamento(idraza,result);
-      console.log(algo);
+      console.log('ids tabla temperamentos: ', algo,'.');
       return result[0];
     } 
     catch (error) {

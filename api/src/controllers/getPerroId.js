@@ -9,7 +9,8 @@ const getDogId = async (req, resp) => {
       const dogsApi = (await axios.get( URLcompleta ));
       const {reference_image_id} = dogsApi.data;
       let urlimagen = URLimagen +  reference_image_id + '.jpg';
-      dogsApi.data.urlimagen = urlimagen; /**aqui agrego atributo 'urlimagen' al objeto  */
+      /**aqui agrego atributo 'urlimagen' al objeto  */
+      dogsApi.data.urlimagen = urlimagen; 
       console.log('aqui por ID');
       return resp.status(200).send(dogsApi.data);  
     }
