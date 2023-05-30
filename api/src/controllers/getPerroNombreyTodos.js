@@ -10,27 +10,23 @@ const axios= require("axios");
    let aux2 = req.query.nombreraza;
    const URLcompleta = URLraza + req.query.nombreraza;    
    let aux3 = Number.isInteger(parseInt(aux2));
-   if (aux3){
+   if (aux3){       /** aqui traigo por numero  */
         console.log('aux2:',aux2,' SI es numero');
        let DogsId = aux2;    
        const URLcompleta = URLid + DogsId;  
        try { 
          console.log('URLcompleta:',URLcompleta);
-         const dogsApi = (await axios.get( URLcompleta ));
-         
-         delete dogsApi.data.weight;
-         delete dogsApi.data.height;
+         const dogsApi = (await axios.get( URLcompleta ));         
+        // delete dogsApi.data.weight;
+        // delete dogsApi.data.height;
          delete dogsApi.data.breed_group;
-
+         delete dogsApi.data.bred_for;
          let url= 'https://cdn2.thedogapi.com/images/';
          dogsApi.data.reference_image_id = url + dogsApi.data.reference_image_id + '.jpg';
-
          console.log('resultado: ', dogsApi.data);
          return resp.status(200).send(dogsApi.data);  
        }
-       catch(error){
-          return resp.status(404).send('No hay data')
-       }  
+       catch(error){ return resp.status(404).send('No hay data') }  
     }
    else
    if( aux2 != undefined ){  /**aqui traigo por nombre */
@@ -38,9 +34,10 @@ const axios= require("axios");
       const elperro = ( await axios.get( URLcompleta ));
      // console.log("Objeto:", elperro.data[0] ,'.');
       let objaux = elperro.data[0]; /**aqui filtro para que me de un objeto */
-      delete objaux.weight;
-      delete objaux.height;
+     // delete objaux.weight;
+     // delete objaux.height;
       delete objaux.breed_group;
+      delete objaux.bred_for;
       let url= 'https://cdn2.thedogapi.com/images/';
       objaux.reference_image_id = url + objaux.reference_image_id + '.jpg';
       /**aqui obtengo el id  */

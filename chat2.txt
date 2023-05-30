@@ -1,0 +1,79 @@
+--Arregla este componente, para que el usuario desde la seleccion de 'temperamentos' , puede incrustar varios elegido, no sólamente uno: ---
+import React, { useState, useEffect } from 'react';
+import { Form, Cont, Tit1, Label, Input, Button, Select } from './styled.Form';
+import axios from 'axios';
+
+const FormPage = () => {
+  const [id, setId] = useState('');
+  const [name, setName] = useState('');
+  const [minHeight, setMinHeight] = useState('');
+  const [maxHeight, setMaxHeight] = useState('');
+  const [minWeight, setMinWeight] = useState('');
+  const [maxWeight, setMaxWeight] = useState('');
+  const [lifeSpan, setLifeSpan] = useState('');
+  const [temperaments, setTemperaments] = useState('');
+  const [temperamentOptions, setTemperamentOptions] = useState([]);
+
+  useEffect(() => {
+   // Realiza la consulta a la base de datos para obtener los temperamentos disponibles
+   const fetchTemperaments = async () => {
+     try {
+       const response = await axios.get('http://localhost:3001/temperamentos');
+       const temperamentos = response.data;
+       setTemperamentOptions(temperamentos);
+     } catch (error) {
+       console.error(error);
+     }
+   };
+   fetchTemperaments();
+ }, []);
+
+  const handleSubmit = async (e) => {
+   e.preventDefault();
+   const dogData = {
+     id: parseInt(id),
+     name,
+     height: { metric: `${minHeight} - ${maxHeight}` },
+     weight: { metric: `${minWeight} - ${maxWeight}` },
+     life_span: lifeSpan,
+     temperament: temperaments,
+     updatedAt: new Date().toISOString(),
+     createdAt: new Date().toISOString(),
+   };
+    try {
+      await axios.post('http://localhost:3001/dogs', dogData);      
+      alert('La raza fue creada correctamente');     
+    } catch (error) {
+      console.error(error);
+      alert('Hubo un error al crear la nueva raza de perro');
+    }
+  };
+
+  return (
+ <Cont>
+ <Tit1>Ingreso Raza-Perro</Tit1>
+  <Form onSubmit={handleSubmit}>
+    <Label>ID:</Label><Input type="number" value={id}  onChange={(e) => setId(e.target.value)} required />
+    <Label>Nombre:</Label><Input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
+    <Label>Alt(mín):</Label><Input type="text" value={minHeight}  onChange={(e) => setMinHeight(e.target.value)} required/>
+    <Label>Alt (máx):</Label><Input type="text" value={maxHeight} onChange={(e) => setMaxHeight(e.target.value)} required/>
+    <Label>Peso(mín):<Input type="text" value={minWeight} onChange={(e) => setMinWeight(e.target.value)} required /></Label><br/>
+    <Label>Peso(máx):<Input type="text" value={maxWeight} onChange={(e) => setMaxWeight(e.target.value)} required /></Label><br/>
+    <Label>Años de vida:<Input type="text" value={lifeSpan} onChange={(e) => setLifeSpan(e.target.value)} required /></Label><br/>
+    <Label>Temperamentos:</Label>
+        <Select value={temperaments} onChange={(e) => setTemperaments(e.target.value)} required>
+          <option value="">Seleccione un temperamento</option>
+          {temperamentOptions.map((temperamento) => (
+            <option key={temperamento.idtemp} value={temperamento.nombret}>
+              {temperamento.nombret}
+            </option>
+          ))}
+        </Select>
+    <Button type="submit">Crear nueva raza</Button>
+  </Form>
+</Cont>
+  );
+};
+
+export default FormPage;
+

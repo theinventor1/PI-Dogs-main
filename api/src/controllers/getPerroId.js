@@ -1,9 +1,7 @@
 const URLid = 'https://api.thedogapi.com/v1/breeds/'
 const URLimagen = 'https://cdn2.thedogapi.com/images/';
-const api = 'api_key=live_ZfLtEnElDpewJMvadPWb8wUz0ot68ZQdARpOUsPaZPWpdFwtjDc0iemAm3FEExFE';
-const {MY_API_KEY} = process.env;
 const axios= require("axios");
-
+    /**Obtiene objeto de perro por Id a la API remota */
 const getDogId = async (req, resp) => {    
     const DogsId = req.params.idRaza;     
     const URLcompleta = URLid + DogsId;  

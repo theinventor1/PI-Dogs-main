@@ -22,15 +22,14 @@ export const BtnCont = styled.div`
   width: 100%;
   justify-content: space-between;
 `;
-export const Btn = styled.button`
+export const Boton = styled.button`
   background-color: #444;
   color: #fff;
-  border: none;
+  border: single;
   border-radius: 5px;
   padding: 10px 20px;
-  font-size: 16px;
+  font-size: 16px; 
   cursor: pointer; 
-  flex: 1;
 `;
 export const Img = styled.img`
   width: 200px;

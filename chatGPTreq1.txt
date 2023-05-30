@@ -1,0 +1,68 @@
+tengo esta tarjeta import React from 'react';
+import { connect } from 'react-redux';
+import { useState, useEffect } from 'react';
+import { Cont, Tit2, Btn, BtnCont,Img } from './styled.Card.js';
+import { Link } from "react-router-dom";
+ function Card(props) {
+ const { id,name,weight,life_span,temperament, image,onClose } = props;
+
+ const [ showCloseButton, setShowCloseButton ] = useState(true);
+
+ return (
+  <Cont>
+    <Tit2>Guau Guau</Tit2> 
+    <div> 
+     <button onClick={ () => onClose(id) }>X2</button>
+    </div>
+   
+    
+    <Link to={`/detail/${id}`}>
+       <Tit2>id: {id}</Tit2>
+       <Img src={image} alt={name} />
+       <Tit2>Nombre: {name}</Tit2>
+       <Tit2>Peso: {weight+' [Kg]'}</Tit2>
+       <Tit2>Años de vida: {life_span}</Tit2>
+       <Tit2>Temperamentos: {temperament}</Tit2>    
+    </Link>
+  </Cont>
+ )
+}
+
+export default Card ; con el botón 'button',pero cuando presiono el boton X2 sale error : Uncaught runtime errors:
+×
+ERROR
+onClose is not a function  --- esta es 'cards' que la contiene : import React from 'react';
+import Card from "../Card/Card";
+// import {Conx } from './styled.Cards.js';
+import { useLocation } from 'react-router-dom';
+
+ function Cards(props) {
+
+  /**paginacion */
+  const { losperros, currentPage, cardsPerPage, onClose } = props;
+  // Calcula el índice inicial y final de las tarjetas a mostrar según la página actual
+  const indexOfLastCard = currentPage * cardsPerPage;
+  const indexOfFirstCard = indexOfLastCard - cardsPerPage;
+  const currentCards = losperros.slice(indexOfFirstCard, indexOfLastCard);
+  return (  
+      <div >
+        { currentCards?.map( (perro) => {
+          return (
+            <Card
+                id={perro.id}
+                name={perro.name}
+                height={perro.height.metric}
+                weight={perro.weight.metric}
+                life_span={perro.life_span}
+                temperament={perro.temperament}
+                image={perro.reference_image_id}       
+                onClose={ ()=> onClose(perro.id) }      
+            />
+          );
+        }) }
+      </div>
+    
+  )
+}
+export default Cards;
+ 

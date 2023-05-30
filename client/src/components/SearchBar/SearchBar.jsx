@@ -3,23 +3,20 @@ import { useState } from "react";
 import { SBCont, SBInput, SBBtn } from './styled.Searchbar';
 
 function SearchBar( { buscaCan } ) {
-      const [raza, setRaza]   = useState(""); /**esto estaba bien  */
+   const [raza, setRaza]   = useState(""); /**esto estaba bien  */
 
-      /**handleChange () */
-      function handChg (event) { 
-
-        setRaza(event.target.value);
-        console.log('handChg:',event.target.value)
-      }
-
-     return (
-     <SBCont>
-      <SBInput type="search" name="search" value = {raza} onChange= {handChg} />
-      
-      <SBBtn  onClick= { () => buscaCan(raza) }>Agregar-Pers</SBBtn>
-
-      <button onClick= { () => buscaCan('Akita') } >HOLA BOTON</button>
-     </SBCont>
+   
+   /**handleChange () */
+   function handChg (event) { 
+     setRaza(event.target.value);
+     console.log('handChg:',event.target.value)
+   }
+  return (
+  <SBCont>
+   <SBInput type="search" name="search" value = {raza} onChange= {handChg} />   
+   <SBBtn  onClick= { () => buscaCan(raza) }>Agregar Can</SBBtn>
+   <button onClick= { () => buscaCan('Akita') } >HOLA BOTON</button>
+  </SBCont>
  )
 }
 export default SearchBar
@@ -34,6 +31,4 @@ Caucasian Shepherd (Ovcharka)
 Chinese Crested
 Chinese Shar-Pei
 Yorkshire Terrier
-
-
 */

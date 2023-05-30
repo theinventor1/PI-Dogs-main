@@ -1,0 +1,14 @@
+{
+  "id": 5,
+  "name": "Airedale Terrier",
+  "bred_for": "Badger, otter hunting",
+  "breed_group": "Terrier",
+  "life_span": "10 - 13 years",
+  "temperament": "Outgoing, Friendly, Alert, Confident, Intelligent, Courageous",
+  "origin": "United Kingdom, England",
+  "reference_image_id": "1-7cgoZSh",
+  "updatedAt": "2023-05-25T06:17:12.375Z",
+  "createdAt": "2023-05-25T06:17:12.375Z",
+  "weight": {"imperial":"40 - 65","metric":"18 - 29"},
+  "height": {"imperial":"21 - 23","metric":"53 - 58"}
+}
