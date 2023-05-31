@@ -12,7 +12,6 @@ const FormPage = () => {
   const [lifeSpan, setLifeSpan] = useState('');
 
   const [temperaments, setTemperaments] = useState( [] ); /**array vacío */
-
   const [temperamentOptions, setTemperamentOptions] = useState([]);
 
   useEffect(() => {

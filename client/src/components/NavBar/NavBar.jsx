@@ -2,13 +2,15 @@ import React from 'react';
 import { Link } from 'react-router-dom'; 
 import { NavCont,NavLogo,NavLinks,Tit1,NavBtn } from './satyled.NavBar';
 import SearchBar from '../SearchBar/SearchBar';
+import FilterBar from '../FilterBar/FilterBar';
 
 
-export default function NavBar({ buscaCan }) {
+export default function NavBar({ buscaCan, onFiltro }) {
  return (
   <NavCont>
-    <Tit1>El NavBar</Tit1>
-    <NavLogo>-LOGO-</NavLogo>
+    <div>
+     <FilterBar onFiltro = { onFiltro } />
+    </div>
      <NavLinks>
         <Link to='/formraza'>
           <NavBtn>Razas-Ingreso</NavBtn>

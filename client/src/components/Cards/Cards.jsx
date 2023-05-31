@@ -16,8 +16,8 @@ import {Conx } from './styled.Cards.js';
      id={perro.id}
      image={perro.urlimagen}    
      name={perro.name}
-     height={perro.height.metric}
-     weight={perro.weight.metric}
+     height={perro.height}
+     weight={perro.weight}
      life_span={perro.life_span}
      temperament={perro.temperament}        
      onClose={ onClose }      /** funcion anónima no va */

@@ -1,0 +1,48 @@
+ Tengo este filtro, para filtrar Card, pero aun no funciona----- :
+
+import React, { useState, useEffect } from 'react';
+import {FilCont, FilBtn } from './styled.FilterBar';
+import axios from 'axios';
+const urltemps= 'http://localhost:3001/temperamentos';
+
+function FilterBar() {
+   const [temperaments, setTemperaments] = useState( [] ); /**array vacío */
+   const [temperamentOptions, setTemperamentOptions] = useState([]);
+   useEffect(() => {
+   const fetchTemperaments = async () => {
+     try {
+       const response = await axios.get(urltemps);
+       console.log(response);
+       const temps = response.data;
+       setTemperamentOptions(temps);
+     } catch (error) {
+       console.error(error);
+     }
+   };
+   fetchTemperaments();
+   }, []);
+
+   const handSelChg = (e) => {
+    const selectedOptions = Array.from(e.target.selectedOptions, (option) => option.value);
+    setTemperaments(selectedOptions);
+   };
+  
+  return (
+    <FilCont>
+          <select value={temperaments} onChange={handSelChg} required multiple>
+          <option value="">Seleccion</option>
+          {temperamentOptions.map((temperamento) => (
+            <option key={temperamento.idtemp} value={temperamento.nombret}>
+              {temperamento.nombret}
+          </option>
+          ))}
+        </select>
+     <FilBtn>Filtrar</FilBtn>
+     
+     <input type="text" />
+
+    </FilCont>
+  )
+}
+export default FilterBar;
+-------- se demora mucho en cargar los temperamentos, quiero que carguen solo al hacer click en el Select 
