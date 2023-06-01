@@ -13,16 +13,16 @@ export default function NavBar({ buscaCan, onFiltro }) {
     </div>
      <NavLinks>
         <Link to='/formraza'>
-          <NavBtn>Razas-Ingreso</NavBtn>
+           <NavBtn>Ingreso</NavBtn>
         </Link>       
         <Link to='/home'>
-          <NavBtn>Home</NavBtn>
+           <NavBtn>Home</NavBtn>
         </Link>
         <Link to='/about'>
          <NavBtn>About</NavBtn>  
         </Link>     
      </NavLinks>    
-     <SearchBar buscaCan={ buscaCan }/>
+     <SearchBar buscaCan = { buscaCan }/>
   </NavCont>
  )
 }

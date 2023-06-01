@@ -11,7 +11,7 @@ function SearchBar( { buscaCan } ) {  /**aqui viene la funcion buscaCan por prop
  return (
  <SBCont>
   <SBInput type="search" name="search" value = {raza} onChange= {handChg} />   
-  <SBBtn  onClick = { () => buscaCan(raza) }>Agregar Can</SBBtn>  
+  <SBBtn  onClick = { () => buscaCan(raza) }>Buscar</SBBtn>  
  </SBCont>
  )
 }

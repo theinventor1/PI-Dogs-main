@@ -7,6 +7,7 @@ import Detail from './components/Detail/Detail';
 import About from './components/About/About';
 import axios from 'axios';
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
+import Landing from './components/Landing/Landing';
 const url1 = 'localhost:3001/dogs/?nombreraza=';
 const urlDogs = 'http://localhost:3001/dogs';
 
@@ -20,7 +21,7 @@ function App() {
    const [ curPag, setCurPag ] = useState(1); // Página actual
    const cardsxPag = 4; // Número de tarjetas por página
    /**fin paginacion */ 
-
+   // navigate('/home'); // Redirige a la ruta "/home" al cargar la aplicación
    function buscaCan(nombreraza) {   
     // console.log('igual entra a buscaCan()');
     axios(`http://localhost:${port}/dogs?nombreraza=${nombreraza}`)
@@ -37,7 +38,7 @@ function App() {
      seteaPerros(( oldCanes) => { return oldCanes.filter((ch) => ch.id !== id);  });
    }
      const totalPages = Math.ceil(perro.length / cardsxPag);
-
+   
    useEffect( () => {        
     const initialDogIds = [];     
     initialDogIds.forEach( (id) => { axios(`http://localhost:${port}/dogs?nombreraza=${id}`)
@@ -46,7 +47,7 @@ function App() {
           console.error(`Error al buscar perro ID ${id}:`, error);
         });
     });     
-    navigate('/home'); // Redirige a la ruta "/home" al cargar la aplicación
+ 
     }, [1,2]);
 
    const  onFiltro = async (idperro) => {
@@ -58,9 +59,8 @@ function App() {
         .catch((error) => {  console.error(`Error ID ${id}:`, error);  }); });  }  }
         catch(error){  console.error(error); }     
    }
-
-
-  return (
+   
+   return (
    <AppCont >
     { pathname !== '/' 
    ? <NavBar buscaCan={ buscaCan } onFiltro={onFiltro} />
@@ -70,9 +70,12 @@ function App() {
        () => setCurPag(index + 1) 
        } disabled={curPag === index + 1} > {index + 1} 
       </button>
-         ))}    
-     <Routes> 
+         ))}        
+      
+    <Routes> 
+      
        <Route path="/home" element={<Cards losperros={perro} onClose={onClose} currentPage={curPag} cardsPerPage={cardsxPag} />} />
+       <Route  path='/' element={ <Landing />}></Route>
        <Route path="/detail/:id" element = {<Detail />} />
        <Route path="/formraza" element = {<FormRaza />} />
        <Route path="/about" element = {<About />} />     
