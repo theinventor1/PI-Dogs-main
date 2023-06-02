@@ -1,6 +1,7 @@
 import { AppCont } from './styledCompApp';
 import { useState, useEffect } from 'react';
 import Cards from './components/Cards/Cards';
+import Homeredux from './components/Homer/Homeredux.jsx'
 import NavBar from './components/NavBar/NavBar';
 import FormRaza from './components/FormRaza/FormRaza2';
 import Detail from './components/Detail/Detail';
@@ -21,7 +22,7 @@ function App() {
    const [ curPag, setCurPag ] = useState(1); // Página actual
    const cardsxPag = 4; // Número de tarjetas por página
    /**fin paginacion */ 
-   // navigate('/home'); // Redirige a la ruta "/home" al cargar la aplicación
+  // navigate('/Home'); // Redirige a la ruta "/home" al cargar la aplicación
    function buscaCan(nombreraza) {   
     // console.log('igual entra a buscaCan()');
     axios(`http://localhost:${port}/dogs?nombreraza=${nombreraza}`)
@@ -35,19 +36,19 @@ function App() {
    }
  
    function onClose(id) {
+     console.log('onClose() -> App');
      seteaPerros(( oldCanes) => { return oldCanes.filter((ch) => ch.id !== id);  });
    }
      const totalPages = Math.ceil(perro.length / cardsxPag);
    
-   useEffect( () => {        
-    const initialDogIds = [];     
-    initialDogIds.forEach( (id) => { axios(`http://localhost:${port}/dogs?nombreraza=${id}`)
-        .then(({ data }) => { seteaPerros( (oldPerros)  => [...oldPerros, data]); })  
-        .catch((error) => {
-          console.error(`Error al buscar perro ID ${id}:`, error);
-        });
-    });     
- 
+    useEffect( () => {        
+     const initialDogIds = [65,67,68];     
+     initialDogIds.forEach( (id) => { axios(`http://localhost:${port}/dogs?nombreraza=${id}`)
+         .then(({ data }) => { seteaPerros( (oldPerros)  => [...oldPerros, data]); })  
+         .catch((error) => {
+           console.error(`Error al buscar perro ID ${id}:`, error);
+         });
+     });     
     }, [1,2]);
 
    const  onFiltro = async (idperro) => {
@@ -62,6 +63,7 @@ function App() {
    
    return (
    <AppCont >
+    
     { pathname !== '/' 
    ? <NavBar buscaCan={ buscaCan } onFiltro={onFiltro} />
    : null }     
@@ -71,10 +73,10 @@ function App() {
        } disabled={curPag === index + 1} > {index + 1} 
       </button>
          ))}        
-      
     <Routes> 
-      
-       <Route path="/home" element={<Cards losperros={perro} onClose={onClose} currentPage={curPag} cardsPerPage={cardsxPag} />} />
+    <Route  path='/Homer' element={ <Homeredux onClose={onClose}/>}></Route>
+
+    <Route path="/home" element={<Cards losperros={perro} onClose={onClose} currentPage={curPag} cardsPerPage={cardsxPag} />} />
        <Route  path='/' element={ <Landing />}></Route>
        <Route path="/detail/:id" element = {<Detail />} />
        <Route path="/formraza" element = {<FormRaza />} />

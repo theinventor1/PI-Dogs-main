@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import {  Div } from './styled.FilterBar';
+import {  Div,Select,Button,LoadingText,Input } from './styled.FilterBar';
 const urltemps = 'http://localhost:3001/temperamentos';
 function FilterBar({ onFiltro }) {
   const [temperaments, setTemperaments] = useState('');
@@ -29,18 +29,18 @@ function FilterBar({ onFiltro }) {
 
  return (
   <Div>
-   <select value={temperaments} onChange={handleTemperamentChange} >
+   <Select value={temperaments} onChange={handleTemperamentChange} >
      <option value="">Seleccion</option>
      {temperamentOptions.map((temperamento) => (
        <option key={temperamento.idtemp} value={temperamento.nombret}>
          {temperamento.nombret}
        </option>
      ))}
-   </select>
-     <button onClick={ () => onFiltro(temperaments) }>Busca</button>
-     {isLoading && <div>Cargando temperamentos...</div>}      
-     <input type="text" />
-     <button >Filtrar</button>
+   </Select>
+     <Button onClick={ () => onFiltro(temperaments) }>Busca</Button>
+     {isLoading && <LoadingText>Cargando temperamentos...</LoadingText>}      
+     <Input type="text" />
+     <Button >Filtrar</Button>
   </Div>
  );
 }

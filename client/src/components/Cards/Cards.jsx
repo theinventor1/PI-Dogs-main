@@ -1,6 +1,7 @@
 import React from 'react';
 import Card from "../Card/Card";
 import {Conx } from './styled.Cards.js';
+
  function Cards(props) {  
   
   /**redux estado global , disponible para los componentes que lo necesiten */
@@ -12,24 +13,30 @@ import {Conx } from './styled.Cards.js';
    Cards (conteneder de card) va a estar mirando el estado global  
     */
 
+   //const perros = useSelector(state=>state.perros2); /** mirando ... */
+
   /**paginacion */
   const { losperros, onClose , currentPage, cardsPerPage  } = props;
   // Calcula el índice inicial y final de las tarjetas a mostrar según la página actual
   const indexOfLastCard = currentPage * cardsPerPage;
   const indexOfFirstCard = indexOfLastCard - cardsPerPage;
+
   const currentCards = losperros.slice(indexOfFirstCard, indexOfLastCard);
+
+  // const currentCards = perros.slice(indexOfFirstCard, indexOfLastCard);
+
   return (  
    <Conx >
-  { currentCards?.map( (perro) => {
+  { currentCards?.map( (perros) => {
   return (
-   <Card
-     id={perro.id}
-     image={perro.urlimagen}    
-     name={perro.name}
-     height={perro.height}
-     weight={perro.weight}
-     life_span={perro.life_span}
-     temperament={perro.temperament}        
+   <Card  
+     id={perros.id}
+     image={perros.urlimagen}    
+     name={perros.name}     
+     weight={perros.weight}
+     height={perros.height}
+     life_span={perros.life_span}
+     temperament={perros.temperament}        
      onClose={ onClose }      /** funcion anónima no va */
    />
   );

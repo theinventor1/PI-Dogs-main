@@ -8,14 +8,8 @@ export const NavCont = styled.div`
   height: 60px;
   padding: 0 20px;
 `;
-export const Tit1 = styled.h1`
-  font-size: 20px;
-  color: #666;
-  margin-bottom: 10px;  
-  text-align: center;
-`;
 
-export const NavLogo = styled.div`
+export const NavFilter = styled.div`
   display: flex;
   align-items: center;
 `;
@@ -28,10 +22,10 @@ export const NavLinks = styled.div`
 export const NavBtn = styled.button`
   background-color: #444;
   color: #fff;
-  border: 2px solid #fff; //agregué un borde sólido alrededor del botón
+  border: 2px solid #fff;
   border-radius: 5px;
-  padding: 10px 20px;
-  font-size: 16px;
+  padding: 7px 14px; /* Achicar el padding en un 30% */
+  font-size: 14px; /* Achicar el tamaño de fuente en un 30% */
   margin-right: 20px;
   cursor: pointer;
   &:hover {

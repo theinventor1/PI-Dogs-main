@@ -5,8 +5,13 @@ const { Router } = require('express');
 const { getdogsall } = require('../controllers/getPerroTodos');
 const { getdoglikename } = require('../controllers/getPerroLikeName');
 const { getdogxtemp} = require('../controllers/getPerroXtemp');
+const { compdogxtemp} = require('../controllers/complDogXtemp');
 const router = Router();
 const { getTemperamentos } = require('../controllers/getTemps.js');
+
+
+router.get('/compltemp/:eltemp', compdogxtemp );
+/** http://localhost:3001/compltemp/Intelligent  */
 
  router.get('/dogname/:elnombre', getdoglikename);
 /** http://localhost:3000/dogname/Max  */

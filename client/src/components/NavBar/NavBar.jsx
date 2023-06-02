@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom'; 
-import { NavCont,NavLogo,NavLinks,Tit1,NavBtn } from './satyled.NavBar';
+import { NavCont,NavFilter,NavLinks,NavBtn } from './styled.NavBar';
 import SearchBar from '../SearchBar/SearchBar';
 import FilterBar from '../FilterBar/FilterBar';
 
@@ -8,15 +8,18 @@ import FilterBar from '../FilterBar/FilterBar';
 export default function NavBar({ buscaCan, onFiltro }) {
  return (
   <NavCont>
-    <div>
-     <FilterBar onFiltro = { onFiltro } />
-    </div>
+    <NavFilter>
+       <FilterBar onFiltro = { onFiltro } />
+    </NavFilter>
      <NavLinks>
         <Link to='/formraza'>
            <NavBtn>Ingreso</NavBtn>
         </Link>       
         <Link to='/home'>
            <NavBtn>Home</NavBtn>
+        </Link>
+        <Link to='/homer'>
+           <NavBtn>HomeR</NavBtn>
         </Link>
         <Link to='/about'>
          <NavBtn>About</NavBtn>  

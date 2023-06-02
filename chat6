@@ -1,0 +1,22 @@
+tengo est funcion en  App , la siguiente funcion: despliega una card con sus detalles :
+
+  function buscaCan(nombreraza) {   
+    // console.log('igual entra a buscaCan()');
+    axios(`http://localhost:${port}/dogs?nombreraza=${nombreraza}`)
+    .then(({ data }) => {  
+      const perroExistente = perro.find(e => e.id == data.id);
+      console.log('buscaCan data::', data)
+      if (perroExistente) { alert(" en la lista:", perroExistente);  } 
+      else                { seteaPerros([...perro, data]);  }
+    })
+    .catch(() => { alert(nombreraza,'NO se encuentra.') })  
+   }
+
+
+ ----quiero hacer una funcion similar, pero el parametro de entrada es un arreglo de objetos de este tipo: 
+
+[{"id":89,"name":"Coton de Tulear","bred_for":"Accompanying ladies on long sea voyages, ratters onboard ship.","breed_group":"Accompanying ladies on long sea voyages, ratters onboard ship.","life_span":"13 - 16 years","temperament":"Affectionate, Lively, Playful, Intelligent, Trainable, Vocal","reference_image_id":"SyviZlqNm","weight":{"imperial":"9 - 15","metric":"4 - 7"},"height":{"imperial":"9 - 11","metric":"23 - 28"}},{"id":111,"name":"Finnish Spitz","bred_for":"Hunting birds, small mammals","breed_group":"Hunting birds, small mammals","life_span":"12 - 15 years","temperament":"Playful, Loyal, Independent, Intelligent, Happy, Vocal","reference_image_id":"3PjHlQbkV","weight":{"imperial":"23 - 28","metric":"10 - 13"},"height":{"imperial":"15.5 - 20","metric":"39 - 51"}},{"id":205,"name":"Pumi","life_span":"13 - 15 years","temperament":"Lively, Reserved, Intelligent, Active, Protective, Vocal","reference_image_id":"SyRe4xcN7","weight":{"imperial":"18 - 33","metric":"8 - 15"},"height":{"imperial":"15 - 18.5","metric":"38 - 47"}}]
+
+el origen de ese arreglo es: 'http://localhost:3001/dogtemp/${paramentrada}'
+
+  

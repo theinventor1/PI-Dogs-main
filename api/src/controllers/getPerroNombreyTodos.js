@@ -30,7 +30,6 @@ const axios= require("axios");
          dogsApi.data.urlimagen = urlimagen;
          console.log('resultado: ', dogsApi.data);
          console.log('urlimagen: ',urlimagen);
-
          return resp.status(200).send(dogsApi.data);  
        }
        catch(error){ return resp.status(404).send('No hay data') }  
@@ -50,11 +49,9 @@ const axios= require("axios");
       /**aqui obtengo el id  */
       var elidperro       = objaux.id;
       var listatempsucia  = objaux.temperament;
-
       /**debo sacar las palabras divididas por ,  */
       //console.log('el_idperro:',elidperro,'.');
       //console.log('temperamentos dirty:',listatempsucia,'.');   
-
       let elarreglolimpio = listatempsucia.split(", ");
 
 
