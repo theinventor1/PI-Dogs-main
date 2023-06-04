@@ -1,7 +1,7 @@
 const axios = require('axios');
 const URLtodos = 'https://api.thedogapi.com/v1/breeds/';
 /** ejemplo: http://localhost:3000/dogname/Max   , busca semajansas de Max */
-const getdoglikename = async (req, res) => {
+const getperrolikename = async (req, res) => {
   try {
     const elnombre = req.params.elnombre;
 
@@ -20,5 +20,5 @@ const getdoglikename = async (req, res) => {
 };
 
 module.exports = {
- getdoglikename,
+ getperrolikename,
 };

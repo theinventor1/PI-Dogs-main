@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {  Div,Select,Button,LoadingText,Input } from './styled.FilterBar';
-const urltemps = 'http://localhost:3001/temperamentos';
+const urltemps = 'http://localhost:3001/temperaments';
 function FilterBar({ onFiltro }) {
   const [temperaments, setTemperaments] = useState('');
   const [temperamentOptions, setTemperamentOptions] = useState([]);

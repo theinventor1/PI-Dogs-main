@@ -13,8 +13,11 @@ export default function NavBar({ buscaCan, onFiltro }) {
     </NavFilter>
      <NavLinks>
         <Link to='/formraza'>
-           <NavBtn>Ingreso</NavBtn>
+           <NavBtn>Formraza</NavBtn>
         </Link>       
+        <Link to='/formrazaredux'>
+           <NavBtn>FormrazaRedux</NavBtn>
+        </Link>   
         <Link to='/home'>
            <NavBtn>Home</NavBtn>
         </Link>

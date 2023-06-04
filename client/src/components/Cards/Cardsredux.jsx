@@ -3,10 +3,10 @@ import Cardredux from "../Card/Cardredux";
 import {Conx } from './styled.Cards.js';
 import { useSelector } from 'react-redux';
 
- function Cardsredux(props) {  
+ function Cardsredux() {  
    const perrosx = useSelector(state => state.perros2); /** mirando ... */
   /**paginacion */
-   const { onClose  } = props;
+
   // Calcula el índice inicial y final de las tarjetas a mostrar según la página actual
   // const indexOfLastCard = currentPage * cardsPerPage;
   // const indexOfFirstCard = indexOfLastCard - cardsPerPage;  
@@ -25,7 +25,7 @@ import { useSelector } from 'react-redux';
      height={indi.height}
      life_span={indi.life_span}
      temperament={indi.temperament}        
-     onClose={ onClose }      /** funcion anónima no va */
+     /** funcion anónima no va */
    />
   );
    }) }

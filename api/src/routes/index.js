@@ -1,30 +1,40 @@
-const { getDogNombreyTodos }  = require('../controllers/getPerroNombreyTodos');
-const { getDogId }  = require('../controllers/getPerroId');
+const { getPerroNombreyTodos }  = require('../controllers/getPerroNombreyTodos');
+const { getPerroIdyRaza }  = require('../controllers/getPerroIdyRaza');
 const { postPerro } = require('../controllers/postCan');
 const { Router } = require('express');
-const { getdogsall } = require('../controllers/getPerroTodos');
-const { getdoglikename } = require('../controllers/getPerroLikeName');
-const { getdogxtemp} = require('../controllers/getPerroXtemp');
-const { compdogxtemp} = require('../controllers/complDogXtemp');
+const { getperrotodos } = require('../controllers/getPerroTodos');
+const { getperrolikename } = require('../controllers/getPerroLikeName');
+const { getperroxtemp} = require('../controllers/getPerroXtemp');
+const { compldogxtemp} = require('../controllers/complDogXtemp');
 const router = Router();
 const { getTemperamentos } = require('../controllers/getTemps.js');
+const { allfromjson } = require('../controllers/allFromJson');
 
+ router.get('/compltemp/:eltemp', compldogxtemp);
+ 
+ /** http://localhost:3001/compltemp/Intelligent  */
 
-router.get('/compltemp/:eltemp', compdogxtemp );
-/** http://localhost:3001/compltemp/Intelligent  */
+ router.get('/dogname/:elnombre', getperrolikename);
 
- router.get('/dogname/:elnombre', getdoglikename);
-/** http://localhost:3000/dogname/Max  */
+ /** http://localhost:3000/dogname/Max  */
+ 
+ router.get('/dogtemp/:eltemp', getperroxtemp );
+ /** http://localhost:3000/dogtemp/Intelligent  */ 
 
- router.get('/dogtemp/:eltemp', getdogxtemp );
-/** http://localhost:3000/dogtemp/Intelligent  */
+ router.get('/dogsall/', getperrotodos );
 
- router.get('/dogsall/', getdogsall );
-/** http://localhost:3000/dogsall/  */
+ /** http://localhost:3000/dogsall/  */
 
  router.post("/postdog", postPerro);
- router.get("/dogs/:idRaza", getDogId);
- router.get("/dogs/", getDogNombreyTodos);
+  
+ router.get('/dogs/name=?',getPerroNombreyTodos); /**por query */
+  /** http://localhost:3001/dogs/name?a=Akita */
 
-router.get("/temperamentos",  getTemperamentos );
-module.exports = router ;
+ router.get("/dogs/:idRaza", getPerroIdyRaza);  /**por params  */
+
+ router.get("/temperaments",  getTemperamentos );
+
+ router.get('/dogs', allfromjson );
+
+ 
+ module.exports = router ;

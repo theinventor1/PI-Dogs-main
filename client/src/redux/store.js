@@ -12,3 +12,4 @@ const store = createStore (
     composeEnhancer(applyMiddleware(thunkMiddleware))
 );
 export default store;
+/**middleware me permite hacer la requests */

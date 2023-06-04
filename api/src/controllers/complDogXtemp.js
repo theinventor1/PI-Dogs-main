@@ -1,6 +1,8 @@
 const URLtodos = 'https://api.thedogapi.com/v1/breeds/';
 const axios = require("axios");
-const compdogxtemp = async (req, resp) => {
+
+const compldogxtemp = async (req, resp) => {
+  console.log('entra a compldogxtemp');
   const temperamento = req.params.eltemp;
   console.log('urlcompleta:', URLtodos);
   try {
@@ -37,5 +39,5 @@ const compdogxtemp = async (req, resp) => {
 };
 
 module.exports = {
- compdogxtemp
+ compldogxtemp
 };

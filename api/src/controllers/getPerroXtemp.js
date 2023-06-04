@@ -1,6 +1,6 @@
 const URLtodos = 'https://api.thedogapi.com/v1/breeds/';
 const axios = require("axios");
-const getdogxtemp = async (req, resp) => {
+const getperroxtemp = async (req, resp) => {
   const temperamento = req.params.eltemp;
   console.log('urlcompleta:', URLtodos);
   try {
@@ -26,5 +26,5 @@ const getdogxtemp = async (req, resp) => {
 };
 
 module.exports = {
-  getdogxtemp
+ getperroxtemp
 };

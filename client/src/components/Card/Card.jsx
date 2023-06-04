@@ -15,7 +15,7 @@ import { Link } from "react-router-dom";
        <Tit2>id: {id}</Tit2>
        <Img src={image} alt={name} />
        <Tit2>Nombre: {name}</Tit2>
-       <Tit2>Peso: {weight+' [Kg]'}</Tit2>
+       <Tit2>Peso: {weight.metric+' [Kg]'}</Tit2>
        <Tit2>Años de vida: {life_span}</Tit2>
        <Tit2>Temperamentos: {temperament}</Tit2>    
     </Link>

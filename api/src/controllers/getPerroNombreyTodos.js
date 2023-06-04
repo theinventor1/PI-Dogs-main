@@ -3,21 +3,21 @@ const URLimagen = 'https://cdn2.thedogapi.com/images/';
 const URLtodos = 'https://api.thedogapi.com/v1/breeds/';
 const URLraza  = 'https://api.thedogapi.com/v1/breeds/search?q=';
 
-
 const { conn } = require('../db');
-
 const axios= require("axios");
 
- const getDogNombreyTodos = async (req, resp) => {
-   let aux2 = req.query.nombreraza;
-   const URLcompleta = URLraza + req.query.nombreraza;    
+ const getPerroNombreyTodos = async (req, resp) => {
+   console.log('entra a getPerroNombreyTodos');
+   let aux2 = req.query.a;
+   console.log('aux2:',aux2);
+   const URLcompleta = URLraza + req.query.a;    
    let aux3 = Number.isInteger(parseInt(aux2));
-   if (aux3){       /** aqui traigo por numero  */
-        console.log('aux2:',aux2,' SI es numero');
+   if (aux3){       /** si aux2 es un numero , entonces aqui traigo por numero  */
+       console.log('entra por query:',aux2,' SI es numero');
        let DogsId = aux2;    
        const URLcompleta = URLid + DogsId;  
        try { 
-         console.log('URLcompleta:',URLcompleta);
+         // console.log('URLcompleta:',URLcompleta);
          const dogsApi = (await axios.get( URLcompleta ));     
          const {reference_image_id} = dogsApi.data;    
         // delete dogsApi.data.weight;
@@ -28,8 +28,8 @@ const axios= require("axios");
          let urlimagen = URLimagen +  reference_image_id + '.jpg';
          dogsApi.data.reference_image_id = url + dogsApi.data.reference_image_id + '.jpg';
          dogsApi.data.urlimagen = urlimagen;
-         console.log('resultado: ', dogsApi.data);
-         console.log('urlimagen: ',urlimagen);
+         // console.log('resultado: ', dogsApi.data);
+         // console.log('urlimagen: ',urlimagen);
          return resp.status(200).send(dogsApi.data);  
        }
        catch(error){ return resp.status(404).send('No hay data') }  
@@ -61,6 +61,8 @@ const axios= require("axios");
    } 
    else {     /**aqui los traigo todos  */
      try {
+         console.log('traigo todo');
+         console.log('req.query:',req.query.name);
          const losperros = (await axios.get( URLtodos ))
          return resp.status(200).send(losperros.data)
      }
@@ -104,10 +106,6 @@ const axios= require("axios");
       });
     }
   };  /**coded by Felipostre */
-
-
-
-
  //  insertarCanTemperamento(5, [
  //   { id: 1 },
  //   { id: 2 },
@@ -122,5 +120,5 @@ const axios= require("axios");
  // ]);
 
 module.exports = {
-  getDogNombreyTodos
+ getPerroNombreyTodos
 }

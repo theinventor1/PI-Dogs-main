@@ -1,8 +1,10 @@
 const URLid = 'https://api.thedogapi.com/v1/breeds/'
 const URLimagen = 'https://cdn2.thedogapi.com/images/';
 const axios= require("axios");
+
     /**Obtiene objeto de perro por Id a la API remota */
-const getDogId = async (req, resp) => {    
+const getPerroId = async (req, resp) => {    
+    console.log('entra a getPerroId');
     const DogsId = req.params.idRaza;     
     const URLcompleta = URLid + DogsId;  
     try {
@@ -16,6 +18,4 @@ const getDogId = async (req, resp) => {
     }
     catch(error){ return resp.status(404).send('No hay data')  }  
 }
-  module.exports = {
-    getDogId
-}
+  module.exports = { getPerroId }
