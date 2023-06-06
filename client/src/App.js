@@ -55,20 +55,43 @@ function App() {
      });     
     },[ ]);
 
-   const onFiltro = async (idperro) => {
-     try{ 
-       const arreglo = await axios.get(`http://localhost:${port}/dogtemp/${idperro}`); 
-       if (arreglo) {
-        arreglo.data.forEach( (id) => { axios(`http://localhost:${port}/dogs/${id}`)
-     .then(({ data }) => { seteaPerros( (oldPerros)  => [...oldPerros, data]); })  
-     .catch((error) => { console.error(`Error ID ${id}:`, error); }); }); } }
-     catch(error){  console.error(error); }     
+   // const onFiltro = async (idperro) => {
+   //   try{ 
+   //     const arreglo = await axios.get(`http://localhost:${port}/dogtemp/${idperro}`); 
+   //     if (arreglo) {
+   //      arreglo.data.forEach( (id) => { axios(`http://localhost:${port}/dogs/${id}`)
+   //   .then(({ data }) => { seteaPerros( (oldPerros)  => [...oldPerros, data]); })  
+   //   .catch((error) => { console.error(`Error ID ${id}:`, error); }); }); } }
+   //   catch(error){  console.error(error); }     
+   // }
+
+
+     const onFiltro = async (idperro) => {
+      try{ 
+        const arreglo = await axios.get(`http://localhost:${port}/dogtemp/${idperro}`); 
+        if (arreglo) {
+         arreglo.data.forEach( (id) => { axios(`http://localhost:${port}/dogs/${id}`)
+      .then(({ data }) => { seteaPerros( (oldPerros)  => [...oldPerros, data]); })  
+      .catch((error) => { console.error(`Error ID ${id}:`, error); }); }); } }
+      catch(error){  console.error(error); }     
+    } 
+
+    function onFiltro2(filterValue) {
+     if (filterValue === "asc") {
+       const sortedPerros = [...perros].sort((a, b) => a.id - b.id);
+       seteaPerros(sortedPerros);
+     } else if (filterValue === "desc") {
+      const sortedPerros = [...perros].sort((a, b) => b.id - a.id);
+      seteaPerros(sortedPerros);
+    } else {
+      // Realiza otras acciones de filtrado si es necesario
+    }
    }
    
   return (
   <AppCont >    
      { pathname !== '/' 
-    ? <NavBar buscaCan={ buscaCan } onFiltro={onFiltro} />
+    ? <NavBar buscaCan={ buscaCan } onFiltro={onFiltro} onFiltro2={onFiltro2} />
     : null }
 
      { Array.from({ length: totalPages }, (_, index) => (

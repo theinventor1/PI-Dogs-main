@@ -2,11 +2,15 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {  Div,Select,Button,LoadingText,Input } from './styled.FilterBar';
 const urltemps = 'http://localhost:3001/temperaments';
-function FilterBar({ onFiltro }) {
+function FilterBar({ onFiltro, onFiltro2 }) {
 
   const [temperaments, setTemperaments] = useState('');
   const [temperamentOptions, setTemperamentOptions] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+
+  /**esto es nuevo */
+  const [filterValue, setFilterValue] = useState('');
+  /** */
   
   const fetchTemperaments = async () => {
     try {
@@ -27,7 +31,9 @@ function FilterBar({ onFiltro }) {
 
   const handleTemperamentChange = (event) => { setTemperaments(event.target.value); };
 
- return (
+  const handleFilter = () => { onFiltro2(filterValue); };
+ 
+  return (
   <Div>
    <select value={temperaments} onChange={handleTemperamentChange} >
      <option value="">Seleccion</option>
@@ -39,8 +45,9 @@ function FilterBar({ onFiltro }) {
    </select>
      <Button onClick={ () => onFiltro(temperaments) }>Busca</Button>
      {isLoading && <LoadingText>Cargando temperamentos...</LoadingText>}      
-     <Input type="text" />
-     <Button >Filtrar</Button>
+     
+     <Input type="text" value={filterValue} onChange={(e) => setFilterValue(e.target.value)} />     
+     <Button onClick={handleFilter}>Filtrar</Button>
   </Div>
  );
 }

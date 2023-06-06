@@ -5,11 +5,11 @@ import SearchBar from '../SearchBar/SearchBar';
 import FilterBar from '../FilterBar/FilterBar';
 
 
-export default function NavBar({ buscaCan, onFiltro }) {
+export default function NavBar({ buscaCan, onFiltro, onFiltro2 }) {
  return (
   <NavCont>
     <NavFilter>
-       <FilterBar onFiltro = { onFiltro } />
+       <FilterBar onFiltro = { onFiltro } onFiltro2 = { onFiltro2 } />
     </NavFilter>
      <NavLinks>
         <Link to='/formraza'>
