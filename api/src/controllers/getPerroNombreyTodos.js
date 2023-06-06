@@ -9,7 +9,7 @@ const axios= require("axios");
  const getPerroNombreyTodos = async (req, resp) => {
    console.log('entra a getPerroNombreyTodos');
    let aux2 = req.query.a;
-   console.log('aux2:',aux2);
+   //console.log('aux2:',aux2);
    const URLcompleta = URLraza + req.query.a;    
    let aux3 = Number.isInteger(parseInt(aux2));
    if (aux3){       /** si aux2 es un numero , entonces aqui traigo por numero  */

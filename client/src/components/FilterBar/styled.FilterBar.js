@@ -30,17 +30,16 @@ export const Button = styled.button`
 export const LoadingText = styled.div`
   margin-right: 7px; /* Reducir el margin-right en un 30% */
 `;
-
 export const Input = styled.input`
-  width: 36.4%; /* Reducir el ancho en un 30% */
-  height: 49%; /* Reducir la altura en un 30% */
-  padding: 0.245em; /* Reducir el padding en un 30% */
-  margin-right: 0.245em; /* Reducir el margen derecho en un 30% */
-  font-size: 0.588em; /* Reducir el tamaño de fuente en un 30% */
+  width: 20%;
+  height: 15px;
+  padding: 0.5em;
+  margin-right: 0.5em;
+  font-size: 0.8em;
   border-radius: 3.5px;
   border: none;
   background-color: #f2f2f2;
-  max-width: 49px; /* Reducir el ancho máximo en un 30% */
+  max-width: 120px;
   &::placeholder {
     color: #aaa;
   }

@@ -10,13 +10,11 @@ import About from './components/About/About';
 import axios from 'axios';
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import Landing from './components/Landing/Landing';
-const url1 = 'localhost:3001/dogs/?nombreraza=';
-const urlDogs = 'http://localhost:3001/dogs';
 
 const port=3001;
 
 function App() {
-   let [ perro, seteaPerros ]  = useState([]);    
+   let [ perros, seteaPerros ]  = useState([]);    
    const navigate = useNavigate();
    const { pathname } = useLocation();
    /**paginacion */
@@ -26,35 +24,36 @@ function App() {
   // navigate('/formraza'); // Redirige a la ruta "/home" al cargar la aplicación
 
    function buscaCan(idonombre) {   
-     if ( idonombre != undefined ) {// console.log('igual entra a buscaCan()');
+     if ( idonombre != undefined ) {
       axios(`http://localhost:${port}/dogs/${idonombre}`)
       .then(({ data }) => {  
-        const perroExistente = perro.find(e => e.id == data.id);
+        const perroExistente = perros.find(e => e.id == data.id);
         console.log('buscaCan data::', data)
         if (perroExistente) { alert(" en la lista:", perroExistente);  } 
-        else  { seteaPerros([...perro, data]);  }
+        else  {  
+         seteaPerros([...perros, data]);  }
       })
       .catch(() => { alert(idonombre,'NO se encuentra.') })
-     }
-
-    
+     }    
     }
  
-   function onClose(id) {
-     console.log('onClose() -> App');
-     seteaPerros(( oldCanes) => { return oldCanes.filter((ch) => ch.id !== id);  });
-   }
-     const totalPages = Math.ceil(perro.length / cardsxPag);
+    function onClose(id) {
+      console.log('onClose() -> App');
+      seteaPerros(( oldCanes) => { return oldCanes.filter((ch) => ch.id !== id);  });
+    }
+
+    const totalPages = Math.ceil(perros.length / cardsxPag);
    
-    // useEffect( () => {        
-    //  const initialDogIds = [];     
-    //  initialDogIds.forEach( (id) => { axios(`http://localhost:${port}/dogs/${id}`)
-    //      .then(({ data }) => { seteaPerros( (oldPerros)  => [...oldPerros, data]); })  
-    //      .catch((error) => {
-    //        console.error(`Error al buscar perro ID ${id}:`, error);
-    //      });
-    //  });     
-    // }, [1,2]);
+    useEffect( () => {        
+     const initialDogIds = [];     
+     initialDogIds.forEach( (id) => { axios(`http://localhost:${port}/dogs/${id}`)
+         .then(({ data }) => { 
+           seteaPerros( (aquiPerros)  => [...aquiPerros, data]);
+          }).catch((error) => {
+           console.error(`Error al buscar perro ID ${id}:`, error);
+         });
+     });     
+    },[ ]);
 
    const onFiltro = async (idperro) => {
      try{ 
@@ -62,31 +61,31 @@ function App() {
        if (arreglo) {
         arreglo.data.forEach( (id) => { axios(`http://localhost:${port}/dogs/${id}`)
      .then(({ data }) => { seteaPerros( (oldPerros)  => [...oldPerros, data]); })  
-     .catch((error) => {  console.error(`Error ID ${id}:`, error);  }); });  }  }
+     .catch((error) => { console.error(`Error ID ${id}:`, error); }); }); } }
      catch(error){  console.error(error); }     
    }
    
-   return (
-   <AppCont >    
-      { pathname !== '/' 
-     ? <NavBar buscaCan={ buscaCan } onFiltro={onFiltro} />
-     : null }     
-      { Array.from({ length: totalPages }, (_, index) => (
-        <button key={index + 1} onClick = { 
-         () => setCurPag(index + 1) 
-         } disabled={curPag === index + 1} > {index + 1} 
-        </button>
-           ))}        
- <Routes> 
-    <Route  path='/Homer' element={ <Homeredux onClose={onClose}/>}></Route>
+  return (
+  <AppCont >    
+     { pathname !== '/' 
+    ? <NavBar buscaCan={ buscaCan } onFiltro={onFiltro} />
+    : null }
 
-    <Route path="/home" element={<Cards losperros={perro} onClose={onClose} currentPage={curPag} cardsPerPage={cardsxPag} />} />
-       <Route  path='/' element={ <Landing />}></Route>
-       <Route path="/detail/:id" element = {<Detail />} />
-       <Route path="/formraza" element = {<FormRaza />} />
-       <Route path="/formrazaredux" element = {<FormRazaRedux />} />
-       <Route path="/about" element = {<About />} />     
-     </Routes>    
+     { Array.from({ length: totalPages }, (_, index) => (
+       <button key={index + 1} onClick = { 
+        () => setCurPag(index + 1) 
+        } disabled={curPag === index + 1} > {index + 1} 
+       </button>
+          ))}        
+   <Routes> 
+    <Route path='/Homer' element={ <Homeredux onClose={onClose}/>}></Route>
+    <Route path="/home" element={<Cards losperros = {perros} onClose={onClose} currentPage={curPag} cardsPerPage={cardsxPag} />} />
+    <Route path='/' element={ <Landing />}></Route>
+    <Route path="/detail/:id" element = {<Detail />} />
+    <Route path="/formraza" element = {<FormRaza />} />
+    <Route path="/formrazaredux" element = {<FormRazaRedux />} />
+    <Route path="/about" element = {<About />} />     
+   </Routes>    
   </AppCont>
     );
 }

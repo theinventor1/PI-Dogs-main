@@ -20,9 +20,9 @@ const { allfromjson } = require('../controllers/allFromJson');
  
  router.get('/dogtemp/:eltemp', getperroxtemp );
  /** http://localhost:3000/dogtemp/Intelligent  */ 
+ 
 
  router.get('/dogsall/', getperrotodos );
-
  /** http://localhost:3000/dogsall/  */
 
  router.post("/postdog", postPerro);

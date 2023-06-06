@@ -3,9 +3,11 @@ import axios from 'axios';
 import {  Div,Select,Button,LoadingText,Input } from './styled.FilterBar';
 const urltemps = 'http://localhost:3001/temperaments';
 function FilterBar({ onFiltro }) {
+
   const [temperaments, setTemperaments] = useState('');
   const [temperamentOptions, setTemperamentOptions] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  
   const fetchTemperaments = async () => {
     try {
       setIsLoading(true);
@@ -23,20 +25,18 @@ function FilterBar({ onFiltro }) {
     fetchTemperaments();
   }, []);
 
-  const handleTemperamentChange = (event) => {
-       setTemperaments(event.target.value);
- };
+  const handleTemperamentChange = (event) => { setTemperaments(event.target.value); };
 
  return (
   <Div>
-   <Select value={temperaments} onChange={handleTemperamentChange} >
+   <select value={temperaments} onChange={handleTemperamentChange} >
      <option value="">Seleccion</option>
      {temperamentOptions.map((temperamento) => (
        <option key={temperamento.idtemp} value={temperamento.nombret}>
          {temperamento.nombret}
        </option>
      ))}
-   </Select>
+   </select>
      <Button onClick={ () => onFiltro(temperaments) }>Busca</Button>
      {isLoading && <LoadingText>Cargando temperamentos...</LoadingText>}      
      <Input type="text" />

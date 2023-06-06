@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
  function Card(props) {
  const { id,name,weight,life_span,temperament, image, onClose } = props;
  //console.log('XonCloseX:', onClose);
- const [ showCloseButton, setShowCloseButton ] = useState(true);
+ // const [ showCloseButton, setShowCloseButton ] = useState(true);
  return (
   <Cont>
     <Tit2>Guau Guau</Tit2>

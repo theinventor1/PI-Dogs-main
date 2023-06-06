@@ -16,6 +16,8 @@ const getPerroId = async (req, resp) => {
       console.log('aqui por ID');
       return resp.status(200).send(dogsApi.data);  
     }
-    catch(error){ return resp.status(404).send('No hay data')  }  
+    catch(error){ 
+     return resp.status(404).send('No hay data')  
+    }  
 }
   module.exports = { getPerroId }

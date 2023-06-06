@@ -28,34 +28,33 @@ const FormPage = () => {
    };
    fetchTemperaments();
    }, []);
-
-  const handleSubmit = async (e) => {
-   e.preventDefault();
-   /**convierte array en string */
-   const temperamentString = temperaments.join(', ');
-   const dogData = {
-     id: parseInt(id),
-     name,
-     height: { metric: `${minHeight} - ${maxHeight}` },
-     weight: { metric: `${minWeight} - ${maxWeight}` },
-     life_span: lifeSpan,
-     temperament: temperamentString, /**trasformo temperamento en string plano */
-     updatedAt: new Date().toISOString(),
-     createdAt: new Date().toISOString(),
-   };
-    try {
-      console.log('esto va a post:',dogData,'.' )
-      await axios.post('http://localhost:3001/postdog/', dogData);      
-      alert('La raza fue creada correctamente');     
-    } catch (error) {
-      console.error(error);
-      alert('Error al crear raza de perro');
-    }
-  };
-  const handleSelectChange = (e) => {
+ const handleSelectChange = (e) => {
    const selectedOptions = Array.from(e.target.selectedOptions, (option) => option.value);
    setTemperaments(selectedOptions);
   };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    /**convierte array en string */
+    const temperamentString = temperaments.join(', ');
+    const dogData = {
+      id: parseInt(id),
+      name,
+      height: { metric: `${minHeight} - ${maxHeight}` },
+      weight: { metric: `${minWeight} - ${maxWeight}` },
+      life_span: lifeSpan,
+      temperament: temperamentString, /**trasformo temperamento en string plano */
+      updatedAt: new Date().toISOString(),
+      createdAt: new Date().toISOString(),
+    };
+     try {
+       console.log('esto va a post:',dogData,'.' )
+       await axios.post('http://localhost:3001/postdog/', dogData);      
+       alert('La raza fue creada correctamente');     
+     } catch (error) {
+       console.error(error);
+       alert('Error al crear raza de perro');
+     }
+  }; 
   return (
    <Cont>
      <Tit1>Ingreso Raza-Perro</Tit1>

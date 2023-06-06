@@ -16,15 +16,4 @@ function SearchBar( { buscaCan } ) {  /**aqui viene la funcion buscaCan por prop
  )
 }
 export default SearchBar
-/*
-Akita
-Affenpinscher
-Afghan Hound
-African Hunting Dog
-Akbash Dog
-Cardigan Welsh Corgi
-Caucasian Shepherd (Ovcharka)
-Chinese Crested
-Chinese Shar-Pei
-Yorkshire Terrier
-*/
+
