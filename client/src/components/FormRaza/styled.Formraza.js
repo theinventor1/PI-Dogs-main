@@ -29,7 +29,8 @@ export const Form = styled.form`
 `;
 
 export const Label = styled.label`
-  margin-bottom: 7px;
+  margin-top: 6px;  
+  margin-bottom: 0px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -43,7 +44,7 @@ export const Input = styled.input`
   font-size: 9.8px;
   border: 0.7px solid #c2c2c2;
   border-radius: 3.5px;
-  margin-top: 3.5px;
+  margin-top: 0.5px;
   outline: none;
 `;
 
@@ -71,7 +72,8 @@ export const Button = styled.button`
 
 export const FormContainer = styled.div`
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
   margin-top: 20px;
 `;
 
@@ -86,4 +88,30 @@ export const SelectContainer = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
+`;
+
+export const DataContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+`;
+
+export const InputDataLabel = styled.label`
+  margin-bottom: 7px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 9.8px;
+  color: #666;
+`;
+
+export const InputData = styled.input`
+  width: 100%;
+  padding: 5.6px;
+  font-size: 9.8px;
+  border: 0.7px solid #c2c2c2;
+  border-radius: 3.5px;
+  margin-top: 3.5px;
+  outline: none;
 `;

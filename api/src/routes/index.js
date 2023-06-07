@@ -9,6 +9,7 @@ const { compldogxtemp} = require('../controllers/complDogXtemp');
 const router = Router();
 const { getTemperamentos } = require('../controllers/getTemps.js');
 const { allfromjson } = require('../controllers/allFromJson');
+const { select4Perros } = require('../controllers/select4Perros')
 
  router.get('/compltemp/:eltemp', compldogxtemp);
  
@@ -35,6 +36,8 @@ const { allfromjson } = require('../controllers/allFromJson');
  router.get("/temperaments",  getTemperamentos );
 
  router.get('/dogs', allfromjson );
+
+ router.get("/4dogs", select4Perros );
 
  
  module.exports = router ;

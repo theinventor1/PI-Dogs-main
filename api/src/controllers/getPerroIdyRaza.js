@@ -57,7 +57,7 @@ const getPerroIdyRaza = async (req, resp) => {
      return resp.status(200).send(resulta[0][0]);
      }
      catch(error){
-      return resp.status(400).send('No se encuentra ')  }
+      return resp.status(400).send('No se encuentra Info.')  }
      }     
    }
    } 

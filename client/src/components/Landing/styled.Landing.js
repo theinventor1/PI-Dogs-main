@@ -12,6 +12,19 @@ export const Contenedor = styled.div`
   justify-content: center;
   align-items: center;
 `;
+export const Cont = styled.div`
+  border-radius: 6px;
+  border: 2px solid #555;
+  background-color: #f9f9f9;
+  padding: 12px;
+  margin: 15px auto;
+  width: 126px;
+  height: 80%; // Reducir el alto del contenedor en un 20%
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+`;
 export const Tit = styled.h2`
   font-size: 24px;
   color: #666;
@@ -33,4 +46,6 @@ export const Img = styled.img`
   height: auto;
   display: block;
   margin: 20px 0;
+  border: 1px solid black;
+  border-radius: 5px;
 `;

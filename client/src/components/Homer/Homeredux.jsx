@@ -35,7 +35,7 @@ const  Homeredux = (props) => {
    }
 
 /**hago dispatch de la ejecucion de un action creator */
-  //const handleOrder  = (evento) => { dispatch ( orderCards(evento.target.value))  }
+  const handleOrder  = (evento) => { dispatch ( orderCards(evento.target.value))  }
 
    
    // const totalPages = Math.ceil(perros2.length / cardsxPag);
@@ -51,12 +51,12 @@ const  Homeredux = (props) => {
            ))}         */}
     <div>
       <p>SELECCION</p>
-         <button onClick = { obtieneTodos }> - BOTON TODOS - </button>
-         <button onClick = { obtieneUno }> - BOTON UNO - </button>
-         {/* <select onChange= { handleOrder }>
+         <button onClick = { obtieneTodos }>BOTON TODOS</button>
+         <button onClick = { obtieneUno }>BOTON UNO</button>
+         <select onChange= { handleOrder }>
                 <option value="A">Ascendente</option>
                 <option value="D">Descendente</option>
-          </select>   */}
+          </select>  
     </div> 
     <Cardsredux losperros={props.perros2} currentPage={curPag} cardsPerPage={cardsxPag}  />
  </AppCont>

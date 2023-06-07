@@ -76,22 +76,41 @@ function App() {
       catch(error){  console.error(error); }     
     } 
 
-    function onFiltro2(filterValue) {
+    function onFiltroId(filterValue) {
      if (filterValue === "asc") {
        const sortedPerros = [...perros].sort((a, b) => a.id - b.id);
        seteaPerros(sortedPerros);
      } else if (filterValue === "desc") {
       const sortedPerros = [...perros].sort((a, b) => b.id - a.id);
       seteaPerros(sortedPerros);
-    } else {
-      // Realiza otras acciones de filtrado si es necesario
-    }
+     } else {   }
+    } 
+     
+    function onFiltroPeso(filterPeso) {
+     if (filterPeso === "min") {
+       const sortedPerros = [...perros].sort((a, b) => getPesoMin(a) - getPesoMin(b));
+       seteaPerros(sortedPerros);
+     } else if (filterPeso === "max") {
+       const sortedPerros = [...perros].sort((a, b) => getPesoMax(b) - getPesoMax(a));
+       seteaPerros(sortedPerros);
+     } else {    }
    }
+   
+   function getPesoMin(perro) {
+     const [min] = perro.weight.metric.split(" - ");
+     return parseInt(min);
+   }
+   
+   function getPesoMax(perro) {
+     const [, max] = perro.weight.metric.split(" - ");
+     return parseInt(max);
+   }
+
    
   return (
   <AppCont >    
      { pathname !== '/' 
-    ? <NavBar buscaCan={ buscaCan } onFiltro={onFiltro} onFiltro2={onFiltro2} />
+    ? <NavBar buscaCan={ buscaCan } onFiltro={onFiltro} onFiltroId={onFiltroId} onFiltroPeso={onFiltroPeso}/>
     : null }
 
      { Array.from({ length: totalPages }, (_, index) => (
@@ -101,7 +120,7 @@ function App() {
        </button>
           ))}        
    <Routes> 
-    <Route path='/Homer' element={ <Homeredux onClose={onClose}/>}></Route>
+    <Route path='/Homer' element={<Homeredux onClose={onClose}/>}></Route>
     <Route path="/home" element={<Cards losperros = {perros} onClose={onClose} currentPage={curPag} cardsPerPage={cardsxPag} />} />
     <Route path='/' element={ <Landing />}></Route>
     <Route path="/detail/:id" element = {<Detail />} />

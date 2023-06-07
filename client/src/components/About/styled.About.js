@@ -8,6 +8,19 @@ export const AboutContainer = styled.div`
   flex-direction: column;
   align-items: center;
 `
+export const Cont = styled.div`
+  border-radius: 6px;
+  border: 2px solid #555;
+  background-color: #f9f9f9;
+  padding: 12px;
+  margin: 15px auto;
+  width: 80%;
+  height: 70%; // Reducir el alto del contenedor en un 20%
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+`;
 
 export const AboutImage = styled.img`
   width: 150px;

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {FormContainer,InputContainer,SelectContainer,Cont,Tit1,Form,Label,Input,Select,Button} from './styled.Formraza';
+import {Cont, FormContainer, InputContainer,SelectContainer,Tit1,Form,Label,Input,Select,InputData,Button} from './styled.Formraza';
 import axios from 'axios';
 
 const FormPage = () => {
@@ -12,6 +12,9 @@ const FormPage = () => {
  const [lifeSpan, setLifeSpan] = useState('');
  const [temperaments, setTemperaments] = useState( [] ); /**array vacío */
  const [temperamentOptions, setTemperamentOptions] = useState([]);
+ /**ultimos 4 registros ingresados */
+ const [latestCans, setLatestCans] = useState([]);
+ const [shouldUpdateTable, setShouldUpdateTable] = useState(false);
 
   useEffect(() => {
    // Realiza la consulta a la base de datos para obtener los temperamentos disponibles
@@ -28,12 +31,39 @@ const FormPage = () => {
    };
    fetchTemperaments();
    }, []);
+
+   useEffect(() => {
+    // Realiza la consulta a la base de datos para obtener los temperamentos disponibles
+    const fetchLatestCans = async () => {
+      try {
+       const response = await axios.get('http://localhost:3001/4dogs');
+       const latestCansData = response.data;
+       setLatestCans(latestCansData);
+  
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchLatestCans();
+    }, []);
+
+
  const handleSelectChange = (e) => {
    const selectedOptions = Array.from(e.target.selectedOptions, (option) => option.value);
    setTemperaments(selectedOptions);
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+     /**aqui valido que minimos seas menores que los maximos  */
+     if (parseInt(minWeight) > parseInt(maxWeight)) {
+      alert("El peso mínimo debe ser menor que el peso máximo");
+      return;
+    }
+  
+    if (parseInt(minHeight) > parseInt(maxHeight)) {
+      alert("La altura mínima debe ser menor que la altura máxima");
+      return;
+    }
     /**convierte array en string */
     const temperamentString = temperaments.join(', ');
     const dogData = {
@@ -49,16 +79,44 @@ const FormPage = () => {
      try {
        console.log('esto va a post:',dogData,'.' )
        await axios.post('http://localhost:3001/postdog/', dogData);      
-       alert('La raza fue creada correctamente');     
+       alert('La raza fue creada correctamente');         
+       setShouldUpdateTable(true); /**actualizo ventana cans */
+       setId('');
+       setName('');
+       setMinHeight('');
+       setMaxHeight('');
+       setMinWeight('');
+       setMaxWeight('');
+       setLifeSpan('');
+       setTemperaments([]);
+
      } catch (error) {
        console.error(error);
        alert('Error al crear raza de perro');
      }
   }; 
+  useEffect(() => {
+   const fetchLatestCans = async () => {
+     try {
+       const response = await axios.get('http://localhost:3001/4dogs');
+       const latestCansData = response.data;
+       setLatestCans(latestCansData);
+       setShouldUpdateTable(false);
+     } catch (error) {
+       console.error(error);
+     }
+   };
+ 
+   if (shouldUpdateTable) {
+     fetchLatestCans();
+   }
+ }, [shouldUpdateTable]);
+
   return (
    <Cont>
-     <Tit1>Ingreso Raza-Perro</Tit1>
+     
      <FormContainer>
+      <Tit1>Ingreso Raza-Perro</Tit1>
        <InputContainer>
         <Form onSubmit={handleSubmit}>
          <Label>ID:</Label>
@@ -75,10 +133,7 @@ const FormPage = () => {
          <Input type="text" value={maxWeight} onChange={(e) => setMaxWeight(e.target.value)} required />
          <Label>Años de vida:</Label>
          <Input type="text" value={lifeSpan} onChange={(e) => setLifeSpan(e.target.value)} required />
-         <Button type="submit">Crear nueva raza</Button>
-        </Form>
-       </InputContainer>
-       <SelectContainer>
+           <SelectContainer>
          <Label>Temperamentos:</Label>
          <Select value={temperaments} onChange={handleSelectChange} required multiple>
            <option value="">Seleccione uno o más temperamentos</option>
@@ -87,9 +142,17 @@ const FormPage = () => {
                {temperamento.nombret}
            </option>
            ))}
-         </Select>
-       </SelectContainer>
-     </FormContainer>
+         </Select>         
+       </SelectContainer> 
+         <Button type="submit">Crear nueva raza</Button>
+        </Form>
+       </InputContainer>
+          
+     </FormContainer>   
+
+
+      <InputData type="text" value={latestCans.map(can => `${can.id}: ${can.name}: ${can.temperament}`).join(', ')} readOnly />
+    
    </Cont>
  );
 };

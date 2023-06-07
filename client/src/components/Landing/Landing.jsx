@@ -1,6 +1,7 @@
 import React from 'react';
-import { Contenedor,Btn } from './styled.Landing';
+import { Contenedor,Btn,Img } from './styled.Landing';
 import { useLocation, useNavigate } from 'react-router-dom';
+import imagenlogo from './perrologo.jpg';
 
  function Landing() {
   const navigate = useNavigate();
@@ -9,9 +10,11 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
   return (
     <div>
+    
      <h1>Landing Page</h1>
-     <Contenedor>
-        <h1>Aqui va un LOGO</h1>
+     <Contenedor> 
+      <Img src={imagenlogo}  />
+        <h1>DOGS - CLIENT - APP</h1>
         <Btn onClick={ ()=> navigate('/Home') }>PINCHA AQUI</Btn>
       </Contenedor>
     </div>
