@@ -32,7 +32,8 @@ const axios= require("axios");
          // console.log('urlimagen: ',urlimagen);
          return resp.status(200).send(dogsApi.data);  
        }
-       catch(error){ return resp.status(404).send('No hay data') }  
+       catch(error){  
+        return resp.status(404).send('No hay data') }  
     }
    else
    if( aux2 != undefined ){  /**  aqui traigo por nombre   */
@@ -55,9 +56,10 @@ const axios= require("axios");
       let elarreglolimpio = listatempsucia.split(", ");
 
 
-      return resp.status(209).send(elperro.data[0]);
+      return resp.status(200).send(elperro.data[0]);
      }
-     catch(error) { return resp.status(404).send('No se encuentra ')  } 
+     catch(error) { /**aqui es error  search homeredux */
+       return resp.status(404).send('No se encuentra ')  } 
    } 
    else {     /**aqui los traigo todos  */
      try {
@@ -66,7 +68,8 @@ const axios= require("axios");
          const losperros = (await axios.get( URLtodos ))
          return resp.status(200).send(losperros.data)
      }
-     catch(error){  return resp.status(404).send('No se encuentra ')  } 
+     catch(error){   
+      return resp.status(404).send('No se encuentra ')  } 
    }    
    }
 

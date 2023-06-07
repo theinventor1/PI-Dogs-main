@@ -13,7 +13,7 @@ const FormPage = () => {
  const [temperaments, setTemperaments] = useState( [] ); /**array vacío */
  const [temperamentOptions, setTemperamentOptions] = useState([]);
  /**ultimos 4 registros ingresados */
- const [latestCans, setLatestCans] = useState([]);
+ const [latestCans, setLatestCans] = useState([]); /** */
  const [shouldUpdateTable, setShouldUpdateTable] = useState(false);
 
   useEffect(() => {

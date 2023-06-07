@@ -10,8 +10,6 @@ import imagenlogo from './perrologo.jpg';
 
   return (
     <div>
-    
-     <h1>Landing Page</h1>
      <Contenedor> 
       <Img src={imagenlogo}  />
         <h1>DOGS - CLIENT - APP</h1>

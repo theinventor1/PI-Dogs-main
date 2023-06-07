@@ -33,4 +33,6 @@ export const Img = styled.img`
   height: auto;
   display: block;
   margin: 20px 0;
+  border-radius: 10%;
+  border: 2px solid #555;
 `;

@@ -18,8 +18,16 @@ const reducer = (state = initialState, action) => {
    return { ...state, perros2: action.payload  };
 
   case GET_PERRO:
-   console.log('GET_PERRO payload:', action.payload);
-   return { ...state, perros2: action.payload } 
+   try{
+   //console.log('GET_PERRO payload:', action.payload);
+   return { ...state, perros2: action.payload }; 
+   }   
+   catch (error) {
+    console.error(error);
+   }
+
+
+
 
    case FILTER_BY_SOURCE:
     return {   }

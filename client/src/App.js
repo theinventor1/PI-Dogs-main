@@ -29,11 +29,12 @@ function App() {
       .then(({ data }) => {  
         const perroExistente = perros.find(e => e.id == data.id);
         console.log('buscaCan data::', data)
-        if (perroExistente) { alert(" en la lista:", perroExistente);  } 
+        if (perroExistente) {  
+            alert(" en la lista:", perroExistente);  } 
         else  {  
          seteaPerros([...perros, data]);  }
       })
-      .catch(() => { alert(idonombre,'NO se encuentra.') })
+      .catch(() => { alert(idonombre, 'NO se encuentra.') })
      }    
     }
  
@@ -120,7 +121,7 @@ function App() {
        </button>
           ))}        
    <Routes> 
-    <Route path='/Homer' element={<Homeredux onClose={onClose}/>}></Route>
+    <Route path='/Homer' element={<Homeredux />}></Route>
     <Route path="/home" element={<Cards losperros = {perros} onClose={onClose} currentPage={curPag} cardsPerPage={cardsxPag} />} />
     <Route path='/' element={ <Landing />}></Route>
     <Route path="/detail/:id" element = {<Detail />} />
