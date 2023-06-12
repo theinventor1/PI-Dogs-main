@@ -45,17 +45,12 @@ function FilterBar({ onFiltro, onFiltroId, onFiltroPeso }) {
        </option>
      ))}
    </select>
-
      <Button onClick={ () => onFiltro(temperaments) }>Busca</Button>
-     {isLoading && <LoadingText>Cargando temperamentos...</LoadingText>}      
-     
-     <Input type="text" value={filterValue} onChange={(e) => setFilterValue(e.target.value)} />     
-     <Button onClick={handleFilter}>Filtrar</Button>
-
-     <Input type="text" value={filterPeso} onChange={(e) => setFilterPeso(e.target.value)} />     
+     {  isLoading && <LoadingText>Cargando temperamentos.</LoadingText>  }
+     <Input type = "text" value = { filterValue } onChange = { (e) => setFilterValue(e.target.value) } />     
+     <Button onClick = {handleFilter} > Filtrar </Button>
+     <Input type = "text" value = { filterPeso } onChange = { (e) => setFilterPeso(e.target.value) } />     
      <Button onClick={handleFilterPeso}>Fil x Peso</Button>
-
-
   </Div>
  );
 }

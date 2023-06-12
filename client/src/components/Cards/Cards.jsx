@@ -1,6 +1,6 @@
 import React from 'react';
 import Card from "../Card/Card";
-import {Conx } from './styled.Cards.js';
+import { Conx } from './styled.Cards.js';
 
  function Cards(props) {    
   /**redux estado global , disponible para los componentes que lo necesiten */
@@ -23,16 +23,17 @@ import {Conx } from './styled.Cards.js';
 
   return (  
    <Conx >
-  { currentCards?.map( (perros) => {
+  {  
+  currentCards?.map( (porcadadog) => {
   return (
    <Card  
-     id={perros.id}
-     image={perros.urlimagen}    
-     name={perros.name}     
-     weight={perros.weight}
-     height={perros.height}
-     life_span={perros.life_span}
-     temperament={perros.temperament}        
+     id={porcadadog.id}
+     image={porcadadog.urlimagen}    
+     name={porcadadog.name}     
+     weight={porcadadog.weight}
+     height={porcadadog.height}
+     life_span={porcadadog.life_span}
+     temperament={porcadadog.temperament}        
      onClose={ onClose }      /** funcion anónima no va */
    />
   );

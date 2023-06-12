@@ -1,13 +1,12 @@
-import { ADD_RAZ, REM_RAZ, FILT_RAZ, ORD_RAZ, ADD_TMP, REM_TMP, FILT_TMP, ORD_TMP  } from "./action-types";
 import perrosx1 from './datadummy';
 
-import { GET_PERRO,GET_PERROS, FILTER_BY_SOURCE,ORDER_BY_SOURCE } from './actions';
+import { GET_PERRO, GET_PERROS, FILTER_BY_SOURCE, ORDER_BY_SOURCE, ORDER_BY_SOURCE2, AUMENTA_CONTADOR, OBT_USER} from './actions';
 
 const initialState = {  
+ contador: 0,
  perros2 : [],
- perrospostres: perrosx1, 
- tuhermana : 'nasty',
- lamagui: 'oli'
+ users: [],
+ user:{}
 }
 /**reducer es quien sabe que hacer en el estado global  */
 
@@ -18,23 +17,35 @@ const reducer = (state = initialState, action) => {
    return { ...state, perros2: action.payload  };
 
   case GET_PERRO:
-   try{
-   //console.log('GET_PERRO payload:', action.payload);
-   return { ...state, perros2: action.payload }; 
-   }   
-   catch (error) {
-    console.error(error);
-   }
+   console.log('GET_PERRO payload:', action.payload);
+   return { ...state, perros2: action.payload } 
 
 
+   case ORDER_BY_SOURCE2:
+   const orderPerro2 = state.perros2.sort((a, b)=> {
+    // asCENDENTE
+    if(action.payload === "A") {     
+        if(getPesoMin(a) < getPesoMin(b)) return 1
+        if(getPesoMin(b) < getPesoMin(a)) return - 1
+        return 0   
+       }
+    // DESCENDENTE
+    else {
+        if(getPesoMin(a) < getPesoMin(b)) return 1
+        if(getPesoMin(b) < getPesoMin(a)) return - 1
+        return {...state, perros2: [...orderPerro2]  }  
+       }          
+          function getPesoMin(perro) {
+           const [min] = perro.weight.metric.split(" - ");
+           return parseInt(min);     }         
+          function getPesoMax(perro) {
+           const [, max] = perro.weight.metric.split(" - ");
+           return parseInt(max);    }
+    })
+    break;
 
-
-   case FILTER_BY_SOURCE:
-    return {   }
-
-   
    case ORDER_BY_SOURCE:
-     const orderPerro = state.perros2.sort((a, b)=> {
+     const orderPerro = state.perros2.sort( (a, b)=> {
       if(action.payload === "A") {
           if(a.name < b.name ) return -1;
           if(b.name < a.name) return 1
@@ -45,13 +56,19 @@ const reducer = (state = initialState, action) => {
           if(b.name < a.name) return - 1
           return 0  }  
     })
-    return {
-      ...state,
-      perros2: [...orderPerro]
-    }
+    return { ...state,   perros2: [...orderPerro] }
    
-  default:
-   return { ...state };  /**una copia del estado */
+    case AUMENTA_CONTADOR:
+       return {
+        ...state,
+        contador: state.contador + 1
+       }
+
+    case OBT_USER:
+       return { ...state, users: action.payload  }
+
+     default:
+       return { ...state   };  /** una copia del estado */
  }
 };
 

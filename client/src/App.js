@@ -29,12 +29,11 @@ function App() {
       .then(({ data }) => {  
         const perroExistente = perros.find(e => e.id == data.id);
         console.log('buscaCan data::', data)
-        if (perroExistente) {  
-            alert(" en la lista:", perroExistente);  } 
+        if (perroExistente) { alert(" en la lista:", perroExistente);  } 
         else  {  
          seteaPerros([...perros, data]);  }
       })
-      .catch(() => { alert(idonombre, 'NO se encuentra.') })
+      .catch(() => { alert(idonombre,'NO se encuentra.') })
      }    
     }
  
@@ -87,7 +86,7 @@ function App() {
      } else {   }
     } 
      
-    function onFiltroPeso(filterPeso) {
+    function onFiltroPeso(filterPeso) {     
      if (filterPeso === "min") {
        const sortedPerros = [...perros].sort((a, b) => getPesoMin(a) - getPesoMin(b));
        seteaPerros(sortedPerros);
@@ -95,17 +94,17 @@ function App() {
        const sortedPerros = [...perros].sort((a, b) => getPesoMax(b) - getPesoMax(a));
        seteaPerros(sortedPerros);
      } else {    }
-   }
+    }
    
-   function getPesoMin(perro) {
-     const [min] = perro.weight.metric.split(" - ");
-     return parseInt(min);
-   }
-   
-   function getPesoMax(perro) {
-     const [, max] = perro.weight.metric.split(" - ");
-     return parseInt(max);
-   }
+     function getPesoMin(perro) {
+       const [min] = perro.weight.metric.split(" - ");
+       return parseInt(min);
+     }
+     
+     function getPesoMax(perro) {
+       const [, max] = perro.weight.metric.split(" - ");
+       return parseInt(max);
+     }
 
    
   return (
