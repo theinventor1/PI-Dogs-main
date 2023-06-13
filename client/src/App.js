@@ -45,7 +45,7 @@ function App() {
     const totalPages = Math.ceil(perros.length / cardsxPag);
    
     useEffect( () => {        
-     const initialDogIds = [];     
+     const initialDogIds = [12,13,18];     
      initialDogIds.forEach( (id) => { axios(`http://localhost:${port}/dogs/${id}`)
          .then(({ data }) => { 
            seteaPerros( (aquiPerros)  => [...aquiPerros, data]);
@@ -55,21 +55,12 @@ function App() {
      });     
     },[ ]);
 
-   // const onFiltro = async (idperro) => {
-   //   try{ 
-   //     const arreglo = await axios.get(`http://localhost:${port}/dogtemp/${idperro}`); 
-   //     if (arreglo) {
-   //      arreglo.data.forEach( (id) => { axios(`http://localhost:${port}/dogs/${id}`)
-   //   .then(({ data }) => { seteaPerros( (oldPerros)  => [...oldPerros, data]); })  
-   //   .catch((error) => { console.error(`Error ID ${id}:`, error); }); }); } }
-   //   catch(error){  console.error(error); }     
-   // }
-
-
-     const onFiltro = async (idperro) => {
+    const onFiltro = async (idperro) => {   /**    Temperamentos   */
       try{ 
-        const arreglo = await axios.get(`http://localhost:${port}/dogtemp/${idperro}`); 
-        if (arreglo) {
+         console.log('app onFiltro:', idperro);
+         const arreglo = await axios.get(`http://localhost:${port}/dogtemp/${idperro}`); 
+         console.log('arreglo app',arreglo,'.');
+         if (arreglo) {
          arreglo.data.forEach( (id) => { axios(`http://localhost:${port}/dogs/${id}`)
       .then(({ data }) => { seteaPerros( (oldPerros)  => [...oldPerros, data]); })  
       .catch((error) => { console.error(`Error ID ${id}:`, error); }); }); } }
@@ -110,7 +101,7 @@ function App() {
   return (
   <AppCont >    
      { pathname !== '/' 
-    ? <NavBar buscaCan={ buscaCan } onFiltro={onFiltro} onFiltroId={onFiltroId} onFiltroPeso={onFiltroPeso}/>
+    ? <NavBar buscaCan={ buscaCan } onFiltro={onFiltro} onFiltroId={onFiltroId} onFiltroPeso={onFiltroPeso} />
     : null }
 
      { Array.from({ length: totalPages }, (_, index) => (
@@ -119,15 +110,19 @@ function App() {
         } disabled={curPag === index + 1} > {index + 1} 
        </button>
           ))}        
-   <Routes> 
-    <Route path='/Homer' element={<Homeredux />}></Route>
-    <Route path="/home" element={<Cards losperros = {perros} onClose={onClose} currentPage={curPag} cardsPerPage={cardsxPag} />} />
-    <Route path='/' element={ <Landing />}></Route>
-    <Route path="/detail/:id" element = {<Detail />} />
-    <Route path="/formraza" element = {<FormRaza />} />
-    <Route path="/formrazaredux" element = {<FormRazaRedux />} />
-    <Route path="/about" element = {<About />} />     
-   </Routes>    
+  <Routes> 
+
+   {/* <Route path='/Homer' element={<Homeredux onFiltro={onFiltro} onFiltroId={onFiltroId} onFiltroPeso={onFiltroPeso} />}></Route> */}
+
+   <Route path='/Homer' element={<Homeredux />}></Route>
+
+   <Route path="/home" element={<Cards losperros = {perros} onClose={onClose} currentPage={curPag} cardsPerPage={cardsxPag} />} />
+   <Route path='/' element={ <Landing />}></Route>
+   <Route path="/detail/:id" element = {<Detail />} />
+   <Route path="/formraza" element = {<FormRaza />} />
+   <Route path="/formrazaredux" element = {<FormRazaRedux />} />
+   <Route path="/about" element = {<About />} />     
+  </Routes>    
   </AppCont>
     );
 }

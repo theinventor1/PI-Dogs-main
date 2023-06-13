@@ -1,6 +1,6 @@
 import perrosx1 from './datadummy';
 
-import { GET_PERRO, GET_PERROS, FILTER_BY_SOURCE, ORDER_BY_SOURCE, ORDER_BY_SOURCE2, AUMENTA_CONTADOR, OBT_USER} from './actions';
+import { GET_PERRO, GET_PERROS, FILTER_BY_SOURCE, ORDER_BY_SOURCE, ORDER_BY_SOURCE2, AUMENTA_CONTADOR, OBT_USER, SET_PERROS, SET_PERROS2 } from './actions';
 
 const initialState = {  
  contador: 0,
@@ -66,6 +66,12 @@ const reducer = (state = initialState, action) => {
 
     case OBT_USER:
        return { ...state, users: action.payload  }
+
+    case SET_PERROS:
+        return {  perros2: [...state, action.payload] }
+    
+   case SET_PERROS2:
+         return { ...state,  perros2: action.payload };
 
      default:
        return { ...state   };  /** una copia del estado */

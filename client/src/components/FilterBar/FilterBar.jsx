@@ -8,7 +8,7 @@ function FilterBar({ onFiltro, onFiltroId, onFiltroPeso }) {
   const [temperaments, setTemperaments] = useState('');
   const [temperamentOptions, setTemperamentOptions] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-
+  
   /**esto es nuevo */
   const [filterValue, setFilterValue] = useState('');
 
@@ -30,9 +30,8 @@ function FilterBar({ onFiltro, onFiltroId, onFiltroPeso }) {
   useEffect(() => {
     fetchTemperaments();
   }, []);
-  const handleTemperamentChange = (event) => { setTemperaments(event.target.value); };
-  const handleFilter = () => { onFiltroId(filterValue); };
-
+  const handleTemperamentChange = (event) => {  setTemperaments(event.target.value); };
+  const handleFilter = () => {  onFiltroId(filterValue); };
   const handleFilterPeso = () => { onFiltroPeso(filterPeso); };
  
   return (
@@ -45,10 +44,10 @@ function FilterBar({ onFiltro, onFiltroId, onFiltroPeso }) {
        </option>
      ))}
    </select>
-     <Button onClick={ () => onFiltro(temperaments) }>Busca</Button>
+     <Button onClick={ () => onFiltro(temperaments) }>Busca FileterBar</Button>
      {  isLoading && <LoadingText>Cargando temperamentos.</LoadingText>  }
      <Input type = "text" value = { filterValue } onChange = { (e) => setFilterValue(e.target.value) } />     
-     <Button onClick = {handleFilter} > Filtrar </Button>
+     <Button onClick = {handleFilter} > Filtrar filterBar </Button>
      <Input type = "text" value = { filterPeso } onChange = { (e) => setFilterPeso(e.target.value) } />     
      <Button onClick={handleFilterPeso}>Fil x Peso</Button>
   </Div>
