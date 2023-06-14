@@ -10,10 +10,14 @@ import About from './components/About/About';
 import axios from 'axios';
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import Landing from './components/Landing/Landing';
+import {  connect } from 'react-redux'; 
 
 const port=3001;
 
-function App() {
+function App(props) {
+  
+   const { showNavBar } = props;
+
    let [ perros, seteaPerros ]  = useState([]);    
    const navigate = useNavigate();
    const { pathname } = useLocation();
@@ -28,7 +32,7 @@ function App() {
       axios(`http://localhost:${port}/dogs/${idonombre}`)
       .then(({ data }) => {  
         const perroExistente = perros.find(e => e.id == data.id);
-        console.log('buscaCan data::', data)
+        console.log('app buscaCan::', data);
         if (perroExistente) { alert(" en la lista:", perroExistente);  } 
         else  {  
          seteaPerros([...perros, data]);  }
@@ -45,7 +49,7 @@ function App() {
     const totalPages = Math.ceil(perros.length / cardsxPag);
    
     useEffect( () => {        
-     const initialDogIds = [12,13,18];     
+     const initialDogIds = [];     
      initialDogIds.forEach( (id) => { axios(`http://localhost:${port}/dogs/${id}`)
          .then(({ data }) => { 
            seteaPerros( (aquiPerros)  => [...aquiPerros, data]);
@@ -68,6 +72,7 @@ function App() {
     } 
 
     function onFiltroId(filterValue) {
+     console.log('app onFiltroid');
      if (filterValue === "asc") {
        const sortedPerros = [...perros].sort((a, b) => a.id - b.id);
        seteaPerros(sortedPerros);
@@ -85,8 +90,7 @@ function App() {
        const sortedPerros = [...perros].sort((a, b) => getPesoMax(b) - getPesoMax(a));
        seteaPerros(sortedPerros);
      } else {    }
-    }
-   
+    }   
      function getPesoMin(perro) {
        const [min] = perro.weight.metric.split(" - ");
        return parseInt(min);
@@ -100,16 +104,24 @@ function App() {
    
   return (
   <AppCont >    
-     { pathname !== '/' 
-    ? <NavBar buscaCan={ buscaCan } onFiltro={onFiltro} onFiltroId={onFiltroId} onFiltroPeso={onFiltroPeso} />
-    : null }
+
+     {
+     pathname !== '/' 
+     ?     
+      showNavBar && <NavBar buscaCan={ buscaCan } onFiltro={onFiltro} onFiltroId={onFiltroId} onFiltroPeso={onFiltroPeso} /> 
+     : null 
+    }
+
+
 
      { Array.from({ length: totalPages }, (_, index) => (
        <button key={index + 1} onClick = { 
         () => setCurPag(index + 1) 
         } disabled={curPag === index + 1} > {index + 1} 
        </button>
-          ))}        
+          ))}      
+          
+            
   <Routes> 
 
    {/* <Route path='/Homer' element={<Homeredux onFiltro={onFiltro} onFiltroId={onFiltroId} onFiltroPeso={onFiltroPeso} />}></Route> */}
@@ -127,5 +139,14 @@ function App() {
     );
 }
 
-export default App;
-/** */
+const mapStateToProps = (state) => {
+ return {
+   showNavBar: state.showNavBar, // Obtener el estado de showNavBar desde el store de Redux
+ };
+};
+
+const mapDispatchToProps = (dispatch) => {
+ return {  };
+};
+
+export default connect(mapStateToProps,null)(App);

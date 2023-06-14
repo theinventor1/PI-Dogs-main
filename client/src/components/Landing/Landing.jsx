@@ -13,7 +13,7 @@ import imagenlogo from './perrologo.jpg';
      <Contenedor> 
       <Img src={imagenlogo}  />
         <h1>DOGS - CLIENT - APP</h1>
-        <Btn onClick={ ()=> navigate('/Home') }>PINCHA AQUI</Btn>
+        <Btn onClick={ ()=> navigate('/Homer') }>PINCHA AQUI</Btn>
       </Contenedor>
     </div>
   )

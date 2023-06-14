@@ -30,8 +30,8 @@ function FilterBar({ onFiltro, onFiltroId, onFiltroPeso }) {
   useEffect(() => {
     fetchTemperaments();
   }, []);
-  const handleTemperamentChange = (event) => {  setTemperaments(event.target.value); };
-  const handleFilter = () => {  onFiltroId(filterValue); };
+  const handleTemperamentChange = (event) => { setTemperaments(event.target.value); };
+  const handleFilter = () => { onFiltroId(filterValue); };
   const handleFilterPeso = () => { onFiltroPeso(filterPeso); };
  
   return (
@@ -44,12 +44,12 @@ function FilterBar({ onFiltro, onFiltroId, onFiltroPeso }) {
        </option>
      ))}
    </select>
-     <Button onClick={ () => onFiltro(temperaments) }>Busca FileterBar</Button>
+     <Button onClick={ () => onFiltro(temperaments) }>Dogs x Temper</Button>
      {  isLoading && <LoadingText>Cargando temperamentos.</LoadingText>  }
      <Input type = "text" value = { filterValue } onChange = { (e) => setFilterValue(e.target.value) } />     
-     <Button onClick = {handleFilter} > Filtrar filterBar </Button>
+     <Button onClick = {handleFilter} > asc desc x id </Button>
      <Input type = "text" value = { filterPeso } onChange = { (e) => setFilterPeso(e.target.value) } />     
-     <Button onClick={handleFilterPeso}>Fil x Peso</Button>
+     <Button onClick={handleFilterPeso}>x peso min max</Button>
   </Div>
  );
 }

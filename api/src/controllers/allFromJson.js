@@ -23,8 +23,8 @@ const allfromjson = async (req, resp) => {
         temperament: perro.temperament,
          origin: perro.origin,
          reference_image_id: perro.reference_image_id, 
-         weight: perro.weight.metric,
-         height: perro.height.metric,
+         weight: perro.weight,
+         height: perro.height,
         urlimagen:'https://cdn2.thedogapi.com/images/'+ perro.reference_image_id+'.jpg' };       
        });
 

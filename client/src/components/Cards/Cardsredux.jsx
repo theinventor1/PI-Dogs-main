@@ -27,8 +27,8 @@ import { useState, useSelector  } from 'react-redux';
      id={indi.id}
      image={indi.urlimagen}    
      name={indi.name}     
-     weight={indi.weight}
-     height={indi.height}
+     weight={indi.weight.metric}
+     // height={indi.height}
      life_span={indi.life_span}
      temperament={indi.temperament}        
      /** funcion anónima no va */
