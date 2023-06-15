@@ -1,13 +1,18 @@
 import perrosx1 from './datadummy';
-
 import { GET_PERRO, GET_PERROS, FILTER_BY_SOURCE, ORDER_BY_NAME, ORDER_BY_PESOMIN, ORDER_BY_PESOMAX, AUMENTA_CONTADOR, OBT_USER, SET_PERROS, SET_PERROS2, TOGGLE_NAVBAR } from './actions';
+
+
+let ObjdArray1 = { arreglo1: [1,2,3]   };
 
 const initialState = {  
  contador: 0,
  perros2 : [],
  users: [],
  user:{},
- showNavBar:false
+ showNavBar:false,
+ pepito: 'hola soy pepito',
+ biblioteca: { a:[], b:[] }
+
 }
 /**reducer es quien sabe que hacer en el estado global  */
 

@@ -1,0 +1,23 @@
+CICLO REDUX:
+ 
+ 1.- LA ACTION ES QUIEN LE AVISA AL REDUCER, QUE TIENE QUE HACER UN CAMBIO EN EL ESTADO GLOBAL. 
+    1.1.- ¿QUIEN ES EL ENCARGADO DE DESPACHAR ACCIONES? EL COMPONENTES ES EL ENCARGADO DE DESPACHAR ACCIONES 
+    1.2.- PARA DESPACHAR ACCIONES USAREMOS mapDispatchToProps 
+    
+    -----------react con redux --------------
+    1.- el componente es el encargado de hacer Dispatch de una action
+    2.- le damos click al boton, se ejecuta lo que esta en onClick, se ejecuta el call back de aumentar contador osea esto (despacho la accion) :  () => dispatch( aumentarContador() )
+    el callback despacha la accion y pregunta cual es su valor de retorno en el 'type',  
+    ese valor se lo envía al Reducer y el Reducer evalua el tipo de accion (action type), en el switch case evalua los casos si los encuentra entonces, 
+    a.- has una copia del estado
+    b.- en contador dejas el (state.contador + 1)  'contador: state.contador + 1' , aqui se modifica el estado;
+    c.- como se modificó mi estado y mi componente estaba atento a el , entonces mi componente tambien se actualiza porque se entera (está atento a los cambios) de los cambios
+    
+    ------------------historia ---- 
+    
+    La historia comienza en el componente, que hace un Dispatch de una  'action' , entonces voy a las action y digo que retorna esta action, este objeto (en el que se encuentra el 'type' ) ese objeto se envía al 'Reducer',  el 'Reducer' que evalua la action  y 'modifica' el estado.
+    
+    El componente se re-renderiza porque está escuchando en tiempo real ()¿en donde? en el h3 en  {this.props.contador}
+    
+   
+ 
